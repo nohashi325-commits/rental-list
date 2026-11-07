@@ -76,7 +76,7 @@ select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background
     <h1>対象町名の賃貸リスト</h1>
     <p class="lead">写真の町名にある、2LDK以上・45㎡以上・家賃22万円以下の部屋です。定期借家、旧耐震の建物、築30年以上でリフォーム・リノベの記載がない部屋は除いています。品川区・目黒区・渋谷区・港区を先に並べています。</p>
   </header>
-  <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全56件</span></div><span>取得日 2026年11月7日 15:26 ・ SUUMO / LIFULL HOME'S / at home / CHINTAI</span></div>
+  <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全56件</span></div><span>取得日 2026年11月7日 15:28 ・ SUUMO / LIFULL HOME'S / at home / CHINTAI</span></div>
   <section class="panel" aria-label="絞り込み">
     <div class="row"><span class="lab">区</span><div class="chips" id="wards"></div></div>
     <div class="row">
@@ -105,7 +105,7 @@ select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background
   <footer class="note">
     <strong>確認していただきたいこと</strong>
     <ul>
-      <li>2026年11月7日 15:26時点の掲載情報です。空室状況と条件は変わるので、問い合わせ前に各サイトの詳細ページで確認してください。</li>
+      <li>2026年11月7日 15:28時点の掲載情報です。空室状況と条件は変わるので、問い合わせ前に各サイトの詳細ページで確認してください。</li>
       <li>定期借家は一覧の表示をもとに除外しています。契約形態は詳細ページでも確認してください。</li>
       <li>家賃22万円は管理費を含めずに判定しています。管理費込みで見る場合は「管理費込みで判定」を選んでください。</li>
       <li>同じ町丁目で家賃・面積・間取りが同じ掲載は、同じ部屋とみなして1件にまとめています。同じ建物の別の階が1件にまとまる場合があります。</li>
@@ -149,7 +149,7 @@ function filtered(){const rent=+$('rent').value,area=+$('area').value,wk=+$('wal
   if(d.ag>=+$('rfr').value&&!d.rf)return false;if($('nogr').checked&&d.gr)return false;if($('ldk').checked&&!/L/.test(d.l))return false;if($('fav').checked&&!favs.has(idOf(d)))return false;
   if(site&&!d.ln[site])return false;if(q&&!(d.n+d.s.join(' ')+d.t).includes(q))return false;return true;});
  const s=$('sort').value,nz=v=>v==null?9999:v;
- const by={new:(a,b)=>(b.d||'').localeCompare(a.d||'')||WARDS.indexOf(a.w)-WARDS.indexOf(b.w)||total(a)-total(b),pri:(a,b)=>WARDS.indexOf(a.w)-WARDS.indexOf(b.w)||total(a)-total(b),total:(a,b)=>total(a)-total(b),area:(a,b)=>b.a-a.a,unit:(a,b)=>total(a)/a.a-total(b)/b.a,walk:(a,b)=>nz(a.wk)-nz(b.wk)||total(a)-total(b),age:(a,b)=>nz(a.ag)-nz(b.ag)||total(a)-total(b)}[s];
+ const by={new:(a,b)=>(b.d||'').localeCompare(a.d||'')||total(a)-total(b),pri:(a,b)=>WARDS.indexOf(a.w)-WARDS.indexOf(b.w)||total(a)-total(b),total:(a,b)=>total(a)-total(b),area:(a,b)=>b.a-a.a,unit:(a,b)=>total(a)/a.a-total(b)/b.a,walk:(a,b)=>nz(a.wk)-nz(b.wk)||total(a)-total(b),age:(a,b)=>nz(a.ag)-nz(b.ag)||total(a)-total(b)}[s];
  return out.sort(by);}
 const BASE='2026-11-06',md=s=>s?+s.slice(5,7)+'/'+ +s.slice(8,10)+(s.length>10?' '+ +s.slice(11,13)+'時':''):'',isNew=d=>d.d&&d.d>BASE&&(Date.now()-new Date(d.d.slice(0,10)+'T00:00'))/864e5<=7;
 function card(d){const id=idOf(d);const links=Object.entries(d.ln).map(([k,u])=>`<a class="go" href="${esc(u)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
