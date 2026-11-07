@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>対象町名の賃貸リスト</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: a working list. Filter panel on top, one dense row per room, price first like a real-estate flyer. */
+:root{
+  --bg:#f3f5f2;--surface:#fff;--fg:#17201c;--muted:#5e6b64;--line:#d8ded9;
+  --accent:#0d5f4f;--accent-soft:#dcece7;--mark:#b3261e;--mark-soft:#fae6e3;--warn:#8a5a00;
+  --font:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --num:"IBM Plex Mono","SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121715;--surface:#1b2220;--fg:#e8eeea;--muted:#9aa8a1;--line:#303a36;
+  --accent:#62c7ae;--accent-soft:#1f3a33;--mark:#ff8f85;--mark-soft:#3d2320;--warn:#e0b45c;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715;--surface:#1b2220;--fg:#e8eeea;--muted:#9aa8a1;--line:#303a36;
+  --accent:#62c7ae;--accent-soft:#1f3a33;--mark:#ff8f85;--mark-soft:#3d2320;--warn:#e0b45c;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+h1{font-size:clamp(22px,3.4vw,30px);font-weight:900;margin:0;letter-spacing:.01em;text-wrap:balance}
+.lead{margin:6px 0 0;color:var(--muted);max-width:70ch}
+.sum{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
+.sum b{font-family:var(--num);font-size:24px;font-weight:600}
+.sum span{color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;display:grid;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.lab{font-size:12px;font-weight:700;color:var(--muted);min-width:3.5em;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.chip{appearance:none;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:4px;padding:4px 9px;font:inherit;font-size:13px;cursor:pointer}
+.chip small{font-family:var(--num);color:var(--muted);margin-left:4px;font-size:11px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.85}
+.chip.pri{font-weight:700}
+.sep{width:1px;height:18px;background:var(--line)}
+label.f{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:4px 6px;max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.list{display:grid;gap:8px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;grid-template-columns:128px minmax(0,1fr) auto;gap:6px 18px;align-items:start}
+.item.circled{border-color:var(--mark)}
+.price b{font-family:var(--num);font-size:22px;font-weight:600;color:var(--accent)}
+.price b i{font-style:normal;font-size:13px;margin-left:1px;font-family:var(--font)}
+.price div{font-size:12px;color:var(--muted)}
+.name{font-weight:700;font-size:15px;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:3px;padding:0 5px;margin-right:6px;background:var(--accent-soft);color:var(--accent);vertical-align:1px}
+.tag.w{background:var(--mark-soft);color:var(--warn)}
+.rf{color:var(--accent);font-weight:500}
+.tag.m{background:var(--mark-soft);color:var(--mark)}
+.spec{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:2px}
+.spec strong{font-family:var(--num);font-weight:600}
+.sub{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.acts{display:flex;flex-direction:column;gap:5px;align-items:stretch;min-width:92px}
+.go{display:block;text-align:center;font-size:12px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:3px 8px;text-decoration:none;white-space:nowrap}
+.go:hover{background:var(--accent-soft)}
+.star{appearance:none;background:none;border:1px solid var(--line);border-radius:4px;color:var(--muted);font:inherit;font-size:12px;padding:3px 8px;cursor:pointer}
+.star[aria-pressed="true"]{color:var(--mark);border-color:var(--mark);background:var(--mark-soft);font-weight:700}
+.more{justify-self:center;font:inherit;font-weight:700;background:var(--accent);color:var(--bg);border:0;border-radius:4px;padding:9px 22px;cursor:pointer}
+.empty{padding:32px;text-align:center;color:var(--muted)}
+.note{color:var(--muted);font-size:12.5px;display:grid;gap:4px}
+.note ul{margin:4px 0 0;padding-left:1.2em}
+@media (max-width:680px){
+  .item{grid-template-columns:minmax(0,1fr)}
+  .acts{flex-direction:row;flex-wrap:wrap;min-width:0}
+  .go,.star{flex:1 1 auto}
+  .sep{display:none}
+}
+</style>
+<div class="wrap">
+  <header>
+    <h1>対象町名の賃貸リスト</h1>
+    <p class="lead">写真の町名にある、2LDK以上・45㎡以上・家賃22万円以下の部屋です。定期借家、旧耐震の建物、築30年以上でリフォーム・リノベの記載がない部屋は除いています。品川区・目黒区・渋谷区・港区を先に並べています。</p>
+  </header>
+  <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全56件</span></div><span>取得日 2026年11月7日 15:07 ・ SUUMO / LIFULL HOME'S / at home / CHINTAI</span></div>
+  <section class="panel" aria-label="絞り込み">
+    <div class="row"><span class="lab">区</span><div class="chips" id="wards"></div></div>
+    <div class="row">
+      <span class="lab">条件</span>
+      <label class="f">町名 <select id="town"></select></label>
+      <label class="f">家賃 <select id="rent"><option value="22">22万円以下</option><option value="20">20万円以下</option><option value="18">18万円以下</option><option value="16">16万円以下</option></select></label>
+      <label class="f"><input type="checkbox" id="incl"> 管理費込みで判定</label>
+      <label class="f">広さ <select id="area"><option value="45">45㎡以上</option><option value="50">50㎡以上</option><option value="55">55㎡以上</option><option value="60">60㎡以上</option><option value="70">70㎡以上</option></select></label>
+      <label class="f">徒歩 <select id="walk"><option value="99">指定なし</option><option value="5">5分以内</option><option value="7">7分以内</option><option value="10">10分以内</option><option value="15">15分以内</option></select></label>
+      <label class="f">築年 <select id="age"><option value="999">指定なし</option><option value="5">5年以内</option><option value="10">10年以内</option><option value="20">20年以内</option><option value="30">30年以内</option></select></label>
+    </div>
+    <div class="row">
+      <span class="lab">表示</span>
+      <label class="f">改装の記載なしを除外 <select id="rfr"><option value="30">築30年以上</option><option value="40">築40年以上</option><option value="999">除外しない</option></select></label>
+      <label class="f"><input type="checkbox" id="nogr"> 1983年3月以前の竣工を隠す</label>
+      <label class="f"><input type="checkbox" id="ldk"> LDKのある間取りのみ</label>
+      <label class="f"><input type="checkbox" id="circled"> 写真で丸印の町（五本木・下馬）のみ</label>
+      <label class="f"><input type="checkbox" id="fav"> 保存した部屋のみ</label>
+      <label class="f">サイト <select id="site"><option value="">すべて</option><option>SUUMO</option><option>HOME'S</option><option>at home</option><option>CHINTAI</option></select></label>
+      <label class="f">検索 <input type="search" id="q" placeholder="建物名・駅名"></label>
+      <label class="f">並び順 <select id="sort"><option value="pri">優先区 → 安い順</option><option value="new">新着順</option><option value="total">総額が安い順</option><option value="area">広い順</option><option value="unit">㎡単価が安い順</option><option value="walk">駅が近い順</option><option value="age">築浅順</option></select></label>
+    </div>
+  </section>
+  <div class="list" id="list"></div>
+  <button class="more" id="more" type="button" hidden>次の50件を表示</button>
+  <footer class="note">
+    <strong>確認していただきたいこと</strong>
+    <ul>
+      <li>2026年11月7日 15:07時点の掲載情報です。空室状況と条件は変わるので、問い合わせ前に各サイトの詳細ページで確認してください。</li>
+      <li>定期借家は一覧の表示をもとに除外しています。契約形態は詳細ページでも確認してください。</li>
+      <li>家賃22万円は管理費を含めずに判定しています。管理費込みで見る場合は「管理費込みで判定」を選んでください。</li>
+      <li>同じ町丁目で家賃・面積・間取りが同じ掲載は、同じ部屋とみなして1件にまとめています。同じ建物の別の階が1件にまとまる場合があります。</li>
+      <li>新耐震の判定は竣工年月によります。基準は確認申請が1981年6月1日以降かどうかなので、1981年6月から1983年3月の竣工は旧基準で申請された可能性があり、「耐震を要確認」と表示しています。</li>
+      <li>リフォーム・リノベは掲載文の記載で判定しています。一部の設備交換だけの部屋も「記載あり」に含まれ、実際に改装していても記載がなければ除外されます。</li>
+      <li>__GAPS__</li>
+    </ul>
+  </footer>
+</div>
+<script>
+const DATA=[{"w":"品川区","t":"東品川","c":"3","n":"エルキュール東品川","r":19.1,"f":10000,"a":46.74,"l":"2LDK","ag":1,"wk":7,"s":["京急本線・久里浜線/青物横丁駅 徒歩8分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010105010000021310310350001/","HOME'S":"https://www.homes.co.jp/chintai/room/db57136a1be4aeb1d2f6e52f93a3fe2f8b675c73/","at home":"https://www.athome.co.jp/chintai/1130180730/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"北品川","c":"2","n":"Lea Hale","r":20.7,"f":10000,"a":47.68,"l":"2LDK","ag":5,"wk":6,"s":["京急本線・久里浜線/新馬場駅 徒歩6分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010090830000012043659360001/","at home":"https://www.athome.co.jp/chintai/1151725729/","SUUMO":"https://suumo.jp/chintai/bc_100535842642/","HOME'S":"https://www.homes.co.jp/chintai/room/73d984deefb2303addc829b5b232a017cc0f0ee5/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"東品川","c":"3","n":"エルキュ―ル東品川","r":22.0,"f":10000,"a":53.09,"l":"2LDK","ag":1,"wk":5,"s":["東京臨海高速鉄道りんかい線 品川シーサイド駅 徒歩7分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"HOME'S":"https://www.homes.co.jp/chintai/room/59d0be67ea729f08e58e1c87a18257615a3429a0/","at home":"https://www.athome.co.jp/chintai/1111704237/","SUUMO":"https://suumo.jp/chintai/bc_100535888680/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"小山","c":"6","n":"メルシー西小山EST","r":20.5,"f":10000,"a":55.74,"l":"2LDK","ag":25,"wk":2,"s":["東急目黒線 西小山駅 徒歩2分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"HOME'S":"https://www.homes.co.jp/chintai/room/f7208763be02180c82c1e8897e6c6f2f74198713/","at home":"https://www.athome.co.jp/chintai/1088471869/","SUUMO":"https://suumo.jp/chintai/bc_100533737347/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"西品川","c":"2","n":"","r":19.5,"f":15000,"a":62.9,"l":"2LDK","ag":9,"wk":8,"s":["JR山手線 「大崎」駅 徒歩8分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"at home":"https://www.athome.co.jp/chintai/6991994719/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"荏原","c":"2","n":"カペラIX","r":18.8,"f":5000,"a":48.74,"l":"2LDK","ag":3,"wk":6,"s":["東急池上線 「戸越銀座」駅 徒歩7分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"at home":"https://www.athome.co.jp/chintai/1105638137/","SUUMO":"https://suumo.jp/chintai/bc_100535698200/","HOME'S":"https://www.homes.co.jp/chintai/room/adea99c0e4bcb3de944419bccbf71a8ea59901c1/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"上目黒","c":"2","n":"ドエルTT","r":17.4,"f":3000,"a":48.75,"l":"2LDK","ag":34,"wk":9,"s":["日比谷線/中目黒駅 徒歩9分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010086990000005115429190001/","SUUMO":"https://suumo.jp/chintai/bc_100535818112/","HOME'S":"https://www.homes.co.jp/chintai/room/4d13db11d76f250fa6ff95ebac591634268db55c/","at home":"https://www.athome.co.jp/chintai/1129312630/"},"p":1,"m":0,"ym":"1992年8月","gr":0,"rf":"リノベーション","d":"2026-11-06"},{"w":"目黒区","t":"中目黒","c":"4","n":"ディアス中目黒","r":17.8,"f":0,"a":45.57,"l":"2LDK","ag":29,"wk":10,"s":["東急東横線/中目黒駅 徒歩10分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-0000003550000000006678910001/","SUUMO":"https://suumo.jp/chintai/bc_100535638799/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"目黒本町","c":"4","n":"アーバンフラッツ目黒本町","r":21.8,"f":15000,"a":58.32,"l":"2LDK","ag":20,"wk":11,"s":["東急目黒線/武蔵小山駅 徒歩14分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010090950000004621141050001/","SUUMO":"https://suumo.jp/chintai/bc_100535844012/","HOME'S":"https://www.homes.co.jp/chintai/room/e0bb3a0a1513c13f43ae6867ba9f4ef71e2339df/","at home":"https://www.athome.co.jp/chintai/1184418333/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"下目黒","c":"2","n":"HJ PLACE MEGURO","r":18.8,"f":8000,"a":47.91,"l":"2LDK","ag":5,"wk":9,"s":["山手線/目黒駅 徒歩9分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-0000003550000000008608040001/","SUUMO":"https://suumo.jp/chintai/bc_100530917997/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"小山","c":"4","n":"サンライズ宗方","r":17.5,"f":0,"a":54.69,"l":"2LDK","ag":25,"wk":3,"s":["東急目黒線 「武蔵小山」駅 徒歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"at home":"https://www.athome.co.jp/chintai/6979290340/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"上大崎","c":"4","n":"目黒芙蓉ハイツ","r":19.5,"f":10000,"a":52.56,"l":"2LDK","ag":41,"wk":5,"s":["JR山手線 「目黒」駅 徒歩6分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"at home":"https://www.athome.co.jp/chintai/6992687528/","SUUMO":"https://suumo.jp/chintai/bc_100398074498/"},"p":1,"m":0,"ym":"1982年7月","gr":1,"rf":"内装リフォーム後渡","d":"2026-11-06"},{"w":"品川区","t":"北品川","c":"1","n":"北品川マンション","r":18.0,"f":5000,"a":50.15,"l":"2LDK","ag":22,"wk":3,"s":["京急本線 「北品川」駅 徒歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"at home":"https://www.athome.co.jp/chintai/6992701668/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"品川区","t":"北品川","c":"2","n":"ナイスアーバン北品川 地上13階地下","r":21.5,"f":15000,"a":56.58,"l":"2LDK","ag":29,"wk":5,"s":["京急本線 「新馬場」駅 徒歩5分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"at home":"https://www.athome.co.jp/chintai/1192200133/","SUUMO":"https://suumo.jp/chintai/bc_100532471476/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"本町","c":"4","n":"セレ渋谷本町","r":21.5,"f":5000,"a":66.66,"l":"2LDK","ag":21,"wk":6,"s":["都営大江戸線/西新宿五丁目駅 徒歩7分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010086990000005115418010001/","SUUMO":"https://suumo.jp/chintai/bc_100535571549/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"初台","c":"2","n":"ブッシュクロ-バ-","r":18.9,"f":6000,"a":57.5,"l":"2LDK","ag":38,"wk":5,"s":["京王線・京王新線/初台駅 徒歩5分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-0000000430000000002815950005/","SUUMO":"https://suumo.jp/chintai/bc_100527037769/"},"p":1,"m":0,"ym":"1988年9月","gr":0,"rf":"リフォーム中 (2026年10月下旬)","d":"2026-11-06"},{"w":"港区","t":"高輪","c":"3","n":"ベルジューレ高輪","r":19.6,"f":20000,"a":49.74,"l":"2LDK","ag":21,"wk":5,"s":["山手線/品川駅 徒歩13分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010090830000012043631480001/","SUUMO":"https://suumo.jp/chintai/bc_100535437972/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"港区","t":"南麻布","c":"1","n":"CONTEL MINAMIAZABU","r":21.0,"f":10000,"a":47.8,"l":"2LDK","ag":6,"wk":8,"s":["南北線/麻布十番駅 徒歩8分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-0000000350000000008275350008/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"下目黒","c":"2","n":"HJ PLACE 目黒通り","r":19.2,"f":8000,"a":52.58,"l":"2LDK","ag":3,"wk":9,"s":["JR山手線/目黒駅 歩9分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100531824451/","HOME'S":"https://www.homes.co.jp/chintai/room/52ec3c5208dab8eba71aecf69437fb40d2c4e5db/","at home":"https://www.athome.co.jp/chintai/1177979636/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"目黒本町","c":"4","n":"ラ・ミアカーサ目黒本町","r":19.3,"f":9000,"a":57.75,"l":"2LDK","ag":11,"wk":12,"s":["東急目黒線/西小山駅 歩12分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100529840081/","HOME'S":"https://www.homes.co.jp/chintai/room/c923afc7171ffd0c9869a82b567c0f3c80324222/","at home":"https://www.athome.co.jp/chintai/1143260517/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"目黒本町","c":"1","n":"アジュール目黒本町","r":19.8,"f":0,"a":56.38,"l":"2LDK","ag":10,"wk":12,"s":["東急東横線/学芸大学駅 歩12分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100532769558/","HOME'S":"https://www.homes.co.jp/chintai/room/e41f703f88012d75c7fb382fb3e089f979908560/","at home":"https://www.athome.co.jp/chintai/1194404233/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"目黒本町","c":"4","n":"アーバンフラッツ目黒本町","r":21.5,"f":15000,"a":58.32,"l":"2LDK","ag":20,"wk":11,"s":["東急目黒線/武蔵小山駅 歩12分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100535092702/","HOME'S":"https://www.homes.co.jp/chintai/room/90d371ae05adbaa06d95bb5b28aeffdb1208d64b/","at home":"https://www.athome.co.jp/chintai/1127876134/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"中央町","c":"1","n":"ラフィネ学芸大学","r":18.1,"f":4000,"a":67.0,"l":"3LDK","ag":25,"wk":13,"s":["東急東横線/学芸大学駅 歩13分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100530462747/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"市谷加賀町","c":"2","n":"ELC.加賀","r":21.5,"f":15000,"a":51.04,"l":"2LDK","ag":12,"wk":8,"s":["都営大江戸線/牛込柳町駅 徒歩8分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-0000000740000000005152970010/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"目黒区","t":"目黒本町","c":"2","n":"かしわファミリーコーポ","r":15.0,"f":0,"a":47.3,"l":"2LDK","ag":28,"wk":12,"s":["東急東横線/学芸大学駅 歩12分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100527240848/","at home":"https://www.athome.co.jp/chintai/1013236768/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"市谷仲之町","c":"","n":"","r":21.0,"f":19000,"a":62.29,"l":"2LDK","ag":22,"wk":5,"s":["都営新宿線/曙橋駅 徒歩5分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010101971310170005318510001/","SUUMO":"https://suumo.jp/chintai/bc_100522737674/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"本町","c":"5","n":"ユーレジデンス幡ケ谷","r":19.7,"f":17000,"a":59.36,"l":"2SLDK","ag":29,"wk":10,"s":["京王新線/幡ケ谷駅 歩11分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100533198160/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"本町","c":"5","n":"","r":19.7,"f":17000,"a":59.36,"l":"3LDK","ag":29,"wk":9,"s":["京王新線/幡ケ谷駅 歩9分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100535135903/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"本町","c":"5","n":"メイプルベル渋谷本町 101号室","r":20.0,"f":6500,"a":53.25,"l":"2LDK","ag":13,"wk":10,"s":["都営大江戸線/西新宿五丁目駅 歩10分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100535532673/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"初台","c":"1","n":"トミークレスト初台","r":20.0,"f":7000,"a":51.29,"l":"2LDK","ag":6,"wk":7,"s":["京王新線/初台駅 歩7分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100532100292/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"本町","c":"5","n":"ユーレジデンス幡ケ谷","r":19.7,"f":17000,"a":59.36,"l":"2LDK","ag":29,"wk":11,"s":["京王新線/幡ケ谷駅 歩11分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100533362883/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"渋谷区","t":"代々木","c":"1","n":"代々木伊藤ローヤルコーポ 406号室","r":21.0,"f":8000,"a":49.1,"l":"2LDK","ag":44,"wk":3,"s":["JR山手線/代々木駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100489823763/"},"p":1,"m":0,"ym":"1983年7月","gr":0,"rf":"リフォーム：2021年9月洋室のフローリング","d":"2026-11-06"},{"w":"港区","t":"白金台","c":"1","n":"ライオンズマンション白金台","r":22.0,"f":0,"a":48.26,"l":"2LDK","ag":28,"wk":5,"s":["東京メトロ南北線/白金高輪駅 歩5分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100534943303/"},"p":1,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"新川","c":"2","n":"パートナーシップアパートメント","r":21.9,"f":17000,"a":53.22,"l":"2LDK","ag":21,"wk":4,"s":["日比谷線/茅場町駅 徒歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010086980000005035779490001/","SUUMO":"https://suumo.jp/chintai/bc_100535759114/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"佃","c":"2","n":"グランリヴィエール","r":21.0,"f":10000,"a":62.06,"l":"2LDK","ag":24,"wk":3,"s":["有楽町線/月島駅 徒歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010087000000005101908530001/","SUUMO":"https://suumo.jp/chintai/bc_100532309244/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"市谷薬王寺町","c":"","n":"コンフォリア市谷薬王寺","r":21.5,"f":12000,"a":50.93,"l":"2LDK","ag":21,"wk":4,"s":["都営大江戸線/牛込柳町駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100535700797/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"愛住町","c":"","n":"ラピス四谷三丁目","r":21.8,"f":9000,"a":50.72,"l":"2LDK","ag":12,"wk":3,"s":["東京メトロ丸ノ内線/四谷三丁目駅 歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100534573435/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"納戸町","c":"","n":"納戸町ハイデンスII","r":20.0,"f":10000,"a":58.84,"l":"2LDK","ag":46,"wk":6,"s":["都営大江戸線/牛込神楽坂駅 歩6分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100532306139/"},"p":0,"m":0,"ym":"1981年9月","gr":1,"rf":"リフォーム：2023/04バスルーム","d":"2026-11-06"},{"w":"新宿区","t":"戸山","c":"1","n":"Monkstown夏目坂 403号室","r":20.8,"f":10000,"a":47.56,"l":"2LDK","ag":3,"wk":4,"s":["東京メトロ東西線/早稲田駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100496829835/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"神楽坂","c":"5","n":"WARADANA神楽坂","r":21.0,"f":10000,"a":47.99,"l":"2LDK","ag":15,"wk":4,"s":["都営大江戸線/牛込神楽坂駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100513724485/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"喜久井町","c":"","n":"夏目坂上ハウス","r":22.0,"f":0,"a":59.72,"l":"2LDK","ag":17,"wk":4,"s":["東京メトロ東西線/早稲田駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100528948100/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"大久保","c":"1","n":"ミハス東新宿II","r":21.5,"f":15000,"a":48.64,"l":"2LDK","ag":3,"wk":2,"s":["東京メトロ副都心線/東新宿駅 歩2分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100525743750/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"大久保","c":"2","n":"ヴィルラフィーネ東新宿 1003号室","r":19.0,"f":10000,"a":53.51,"l":"2LDK","ag":26,"wk":4,"s":["東京メトロ副都心線/西早稲田駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100522058458/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"世田谷区","t":"代沢","c":"4","n":"クレスト下北沢","r":21.8,"f":12000,"a":49.25,"l":"2LDK","ag":0,"wk":10,"s":["小田急小田原線/下北沢駅 徒歩11分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"CHINTAI":"https://www.chintai.net/detail/bk-C010090870000004532078690001/","SUUMO":"https://suumo.jp/chintai/bc_100534907642/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"大久保","c":"2","n":"日神パレステージ東新宿イーストフォート 303号室","r":21.0,"f":10000,"a":56.23,"l":"2LDK","ag":25,"wk":2,"s":["東京メトロ副都心線/東新宿駅 歩2分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100518805495/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"新宿区","t":"市谷柳町","c":"","n":"","r":21.0,"f":0,"a":70.65,"l":"2LDK","ag":33,"wk":3,"s":["都営大江戸線/牛込柳町駅 歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100528941825/"},"p":0,"m":0,"ym":"1994年3月","gr":0,"rf":"リフォーム：2024年10月キッチン","d":"2026-11-06"},{"w":"新宿区","t":"百人町","c":"4","n":"ライオンズマンション高田馬場サウスレジデンス","r":21.8,"f":12000,"a":56.42,"l":"2LDK","ag":22,"wk":9,"s":["JR山手線/高田馬場駅 歩9分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100531550043/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"佃","c":"3","n":"グラン月島","r":21.9,"f":6000,"a":56.24,"l":"2LDK","ag":4,"wk":3,"s":["東京メトロ有楽町線/月島駅 歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100529357322/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"月島","c":"3","n":"オーベル月島リバージュグラン","r":19.8,"f":12000,"a":46.57,"l":"2LDK","ag":26,"wk":8,"s":["東京メトロ有楽町線/月島駅 歩8分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100531654509/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"月島","c":"3","n":"レジデンスシャルマン月島 436号室","r":21.5,"f":14000,"a":57.98,"l":"2LDK","ag":23,"wk":4,"s":["都営大江戸線/勝どき駅 歩4分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100524030922/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"勝どき","c":"3","n":"スタジオデン勝どき 802号室","r":20.5,"f":15000,"a":50.1,"l":"2LDK","ag":23,"wk":3,"s":["都営大江戸線/勝どき駅 歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100524163341/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"中央区","t":"佃","c":"2","n":"グランリヴィエール","r":21.0,"f":10000,"a":62.02,"l":"2LDK","ag":25,"wk":3,"s":["東京メトロ有楽町線/月島駅 歩3分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100532734305/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"世田谷区","t":"三宿","c":"1","n":"オーベルジュ三宿 502号室","r":18.5,"f":5000,"a":49.75,"l":"2LDK","ag":28,"wk":8,"s":["東急田園都市線/三軒茶屋駅 歩10分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100535714201/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"世田谷区","t":"三宿","c":"2","n":"世田谷区三宿2丁目テラスハウス 201号室","r":19.8,"f":0,"a":60.51,"l":"2LDK","ag":16,"wk":9,"s":["京王井の頭線/池ノ上駅 歩10分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100528563313/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"世田谷区","t":"太子堂","c":"2","n":"","r":21.0,"f":0,"a":52.79,"l":"2LDK","ag":3,"wk":6,"s":["東急田園都市線/三軒茶屋駅 歩6分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100393778053/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"},{"w":"世田谷区","t":"池尻","c":"4","n":"SOUTHERN VIEW IKEJIRI(サザンビュー池尻)","r":21.8,"f":10000,"a":53.41,"l":"2LDK","ag":7,"wk":9,"s":["東急田園都市線/池尻大橋駅 歩9分"],"ty":"","fl":"","sk":"-","rk":"-","ln":{"SUUMO":"https://suumo.jp/chintai/bc_100531401093/"},"p":0,"m":0,"ym":"","gr":0,"rf":"","d":"2026-11-06"}];
+const PRI=['品川区','目黒区','渋谷区','港区'];
+const WARDS=['品川区','目黒区','渋谷区','港区','新宿区','千代田区','中央区','文京区','江東区','世田谷区'];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const idOf=d=>[d.w,d.t,d.c,d.r,d.a,d.l].join('|');
+let favs=new Set();try{favs=new Set(JSON.parse(localStorage.getItem('favs')||'[]'))}catch(e){}
+const saveFavs=()=>{try{localStorage.setItem('favs',JSON.stringify([...favs]))}catch(e){}};
+const active=new Set(WARDS);let shown=50;
+const counts={};DATA.forEach(d=>counts[d.w]=(counts[d.w]||0)+1);
+$('wards').innerHTML=WARDS.filter(w=>counts[w]).map(w=>`<button type="button" class="chip${PRI.includes(w)?' pri':''}" data-w="${w}" aria-pressed="true">${w}<small>${counts[w]}</small></button>`).join('')
+ +'<span class="sep"></span><button type="button" class="chip" id="onlypri" aria-pressed="false">優先4区のみ</button>';
+function fillTowns(){const cur=$('town').value;const m={};DATA.filter(d=>active.has(d.w)).forEach(d=>{const k=d.w+' '+d.t;m[k]=(m[k]||0)+1});
+ $('town').innerHTML='<option value="">すべて</option>'+Object.keys(m).sort((a,b)=>WARDS.indexOf(a.split(' ')[0])-WARDS.indexOf(b.split(' ')[0])||a.localeCompare(b,'ja')).map(k=>`<option value="${esc(k)}">${esc(k)}（${m[k]}）</option>`).join('');
+ if(m[cur])$('town').value=cur;}
+const total=d=>d.r+d.f/10000;
+function filtered(){const rent=+$('rent').value,area=+$('area').value,wk=+$('walk').value,ag=+$('age').value,town=$('town').value,site=$('site').value,q=$('q').value.trim();
+ const out=DATA.filter(d=>{if(!active.has(d.w))return false;if(town&&d.w+' '+d.t!==town)return false;
+  if(($('incl').checked?total(d):d.r)>rent)return false;if(d.a<area)return false;
+  if(wk<99&&(d.wk==null||d.wk>wk))return false;if(ag<999&&(d.ag==null||d.ag>ag))return false;
+  if(d.ag>=+$('rfr').value&&!d.rf)return false;if($('nogr').checked&&d.gr)return false;if($('ldk').checked&&!/L/.test(d.l))return false;if($('circled').checked&&!d.m)return false;if($('fav').checked&&!favs.has(idOf(d)))return false;
+  if(site&&!d.ln[site])return false;if(q&&!(d.n+d.s.join(' ')+d.t).includes(q))return false;return true;});
+ const s=$('sort').value,nz=v=>v==null?9999:v;
+ const by={new:(a,b)=>(b.d||'').localeCompare(a.d||'')||WARDS.indexOf(a.w)-WARDS.indexOf(b.w)||total(a)-total(b),pri:(a,b)=>WARDS.indexOf(a.w)-WARDS.indexOf(b.w)||total(a)-total(b),total:(a,b)=>total(a)-total(b),area:(a,b)=>b.a-a.a,unit:(a,b)=>total(a)/a.a-total(b)/b.a,walk:(a,b)=>nz(a.wk)-nz(b.wk)||total(a)-total(b),age:(a,b)=>nz(a.ag)-nz(b.ag)||total(a)-total(b)}[s];
+ return out.sort(by);}
+const BASE='2026-11-06',md=s=>s?+s.slice(5,7)+'/'+ +s.slice(8,10):'',isNew=d=>d.d&&d.d>BASE&&(Date.now()-new Date(d.d))/864e5<=7;
+function card(d){const id=idOf(d);const links=Object.entries(d.ln).map(([k,u])=>`<a class="go" href="${esc(u)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
+ const dep=[d.sk&&d.sk!=='-'?'敷 '+d.sk:'',d.rk&&d.rk!=='-'?'礼 '+d.rk:''].filter(Boolean).join(' / ');
+ return `<article class="item${d.m?' circled':''}"><div class="price"><b>${d.r}<i>万円</i></b><div>管理費 ${d.f?d.f.toLocaleString()+'円':'なし・不明'}</div><div>総額 ${total(d).toFixed(2).replace(/0$/,'')}万円</div></div>
+ <div><div class="name">${d.m?'<span class="tag m">丸印の町</span>':''}<span class="tag">${esc(d.w)}</span>${isNew(d)?`<span class="tag m">新着 ${md(d.d)}</span>`:''}${d.gr?'<span class="tag w">耐震を要確認</span>':''}${esc(d.n||'建物名なし')}</div>
+ <div class="spec"><span><strong>${esc(d.l)}</strong></span><span><strong>${d.a}</strong>㎡</span><span>${d.ym?esc(d.ym)+'築（築'+d.ag+'年）':d.ag===0?'新築':'築'+d.ag+'年'}</span>${d.ty?`<span>${esc(d.ty)}</span>`:''}${d.fl?`<span>${esc(d.fl)}</span>`:''}</div>
+ <div class="sub">${esc(d.t)}${d.c?esc(d.c)+'丁目':''}${dep?' ・ '+esc(dep):''}</div><div class="sub">${esc(d.s.join(' ／ '))}</div><div class="sub">${d.d&&d.d>BASE?'見つけた日 '+md(d.d):md(BASE)+'以前から掲載'}</div>${d.rf?`<div class="sub rf">改装の記載: ${esc(d.rf)}</div>`:''}</div>
+ <div class="acts">${links}<button type="button" class="star" data-id="${esc(id)}" aria-pressed="${favs.has(id)}">${favs.has(id)?'保存済み':'保存'}</button></div></article>`;}
+function render(){const r=filtered();$('cnt').textContent=r.length.toLocaleString();
+ $('list').innerHTML=r.length?r.slice(0,shown).map(card).join(''):'<div class="empty">条件に合う部屋がありません。家賃や広さの条件を緩めてください。</div>';
+ $('more').hidden=r.length<=shown;}
+function reset(){shown=50;render();}
+$('wards').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.id==='onlypri'){const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);active.clear();WARDS.forEach(w=>{if(!on||PRI.includes(w))active.add(w)});
+  document.querySelectorAll('[data-w]').forEach(x=>x.setAttribute('aria-pressed',active.has(x.dataset.w)));}
+ else{const w=b.dataset.w;active.has(w)?active.delete(w):active.add(w);b.setAttribute('aria-pressed',active.has(w));$('onlypri').setAttribute('aria-pressed','false');}
+ fillTowns();reset();});
+['rfr','nogr','town','rent','incl','area','walk','age','ldk','circled','fav','site','sort'].forEach(i=>$(i).addEventListener('change',reset));
+$('q').addEventListener('input',reset);
+$('more').addEventListener('click',()=>{shown+=50;render();});
+$('list').addEventListener('click',e=>{const b=e.target.closest('.star');if(!b)return;const id=b.dataset.id;favs.has(id)?favs.delete(id):favs.add(id);saveFavs();const on=favs.has(id);b.setAttribute('aria-pressed',on);b.textContent=on?'保存済み':'保存';if($('fav').checked)render();});
+fillTowns();render();
+</script>
+</html>
