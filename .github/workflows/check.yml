@@ -1,0 +1,62 @@
+# 賃貸の新着チェック。日本時間の 0・9・12・15・18・21時ごろに動く（GitHub の混み具合で数分〜数十分遅れることがある）
+# 新着があれば LINE に送り、一覧ページ（GitHub Pages）を作り直し、見た部屋の記録（bot/*.json）を commit する。
+# Actions タブの「Run workflow」から手で動かすこともできる。
+name: check
+
+on:
+  schedule:
+    - cron: '7 0,3,6,9,12,15 * * *'   # UTC。日本時間の 9・12・15・18・21・0時7分
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    env:
+      TZ: Asia/Tokyo
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install beautifulsoup4==4.15.0
+
+      - name: 新着を探して通知
+        run: python -I bot/watch.py
+        env:
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+          GH_TOKEN: ${{ github.token }}
+
+      - name: 記録を保存
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git diff --cached --quiet || git commit -m "$(date '+%Y-%m-%d %H:%M') 更新"
+          git push
+
+      - name: 公開するファイルをまとめる
+        run: mkdir _site && cp index.html robots.txt .nojekyll _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

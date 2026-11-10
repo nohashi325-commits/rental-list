@@ -1,0 +1,179 @@
+<title>対象町名の賃貸リスト</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: a working list. Filter panel on top, one dense row per room, price first like a real-estate flyer. */
+:root{
+  --bg:#f3f5f2;--surface:#fff;--fg:#17201c;--muted:#5e6b64;--line:#d8ded9;
+  --accent:#0d5f4f;--accent-soft:#dcece7;--mark:#b3261e;--mark-soft:#fae6e3;--warn:#8a5a00;
+  --font:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --num:"IBM Plex Mono","SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121715;--surface:#1b2220;--fg:#e8eeea;--muted:#9aa8a1;--line:#303a36;
+  --accent:#62c7ae;--accent-soft:#1f3a33;--mark:#ff8f85;--mark-soft:#3d2320;--warn:#e0b45c;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121715;--surface:#1b2220;--fg:#e8eeea;--muted:#9aa8a1;--line:#303a36;
+  --accent:#62c7ae;--accent-soft:#1f3a33;--mark:#ff8f85;--mark-soft:#3d2320;--warn:#e0b45c;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
+h1{font-size:clamp(22px,3.4vw,30px);font-weight:900;margin:0;letter-spacing:.01em;text-wrap:balance}
+.lead{margin:6px 0 0;color:var(--muted);max-width:70ch}
+.sum{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
+.sum b{font-family:var(--num);font-size:24px;font-weight:600}
+.sum span{color:var(--muted)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;display:grid;gap:12px}
+.row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.lab{font-size:12px;font-weight:700;color:var(--muted);min-width:3.5em;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.chip{appearance:none;border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:4px;padding:4px 9px;font:inherit;font-size:13px;cursor:pointer}
+.chip small{font-family:var(--num);color:var(--muted);margin-left:4px;font-size:11px}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.85}
+.chip.pri{font-weight:700}
+.sep{width:1px;height:18px;background:var(--line)}
+label.f{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:4px 6px;max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.list{display:grid;gap:8px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;grid-template-columns:128px minmax(0,1fr) auto;gap:6px 18px;align-items:start}
+.item.hl{border:2px solid var(--accent);background:linear-gradient(var(--accent-soft),var(--accent-soft)) top/100% 4px no-repeat,var(--surface)}
+.tag.hl{background:var(--accent);color:var(--bg)}
+.price b{font-family:var(--num);font-size:22px;font-weight:600;color:var(--accent)}
+.price b i{font-style:normal;font-size:13px;margin-left:1px;font-family:var(--font)}
+.price div{font-size:12px;color:var(--muted)}
+.name{font-weight:700;font-size:15px;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:3px;padding:0 5px;margin-right:6px;background:var(--accent-soft);color:var(--accent);vertical-align:1px}
+.tag.w{background:var(--mark-soft);color:var(--warn)}
+.rf{color:var(--accent);font-weight:500}
+.tag.m{background:var(--mark-soft);color:var(--mark)}
+.spec{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:2px}
+.spec strong{font-family:var(--num);font-weight:600}
+.sub{color:var(--muted);font-size:12.5px;overflow-wrap:anywhere}
+.acts{display:flex;flex-direction:column;gap:5px;align-items:stretch;min-width:92px}
+.go{display:block;text-align:center;font-size:12px;font-weight:700;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:3px 8px;text-decoration:none;white-space:nowrap}
+.go:hover{background:var(--accent-soft)}
+.star{appearance:none;background:none;border:1px solid var(--line);border-radius:4px;color:var(--muted);font:inherit;font-size:12px;padding:3px 8px;cursor:pointer}
+.star[aria-pressed="true"]{color:var(--mark);border-color:var(--mark);background:var(--mark-soft);font-weight:700}
+.nope{display:block;text-align:center;font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:4px;padding:3px 8px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.nope:hover{color:var(--warn);border-color:var(--warn)}
+.outnote{font-size:12.5px;color:var(--muted)}
+.more{justify-self:center;font:inherit;font-weight:700;background:var(--accent);color:var(--bg);border:0;border-radius:4px;padding:9px 22px;cursor:pointer}
+.empty{padding:32px;text-align:center;color:var(--muted)}
+.note{color:var(--muted);font-size:12.5px;display:grid;gap:4px}
+.note ul{margin:4px 0 0;padding-left:1.2em}
+@media (max-width:680px){
+  .item{grid-template-columns:minmax(0,1fr)}
+  .acts{flex-direction:row;flex-wrap:wrap;min-width:0}
+  .go,.star{flex:1 1 auto}
+  .sep{display:none}
+}
+</style>
+<div class="wrap">
+  <header>
+    <h1>対象町名の賃貸リスト</h1>
+    <p class="lead">写真の町名にある、2LDK以上・45㎡以上・家賃22万円以下の部屋です。定期借家、旧耐震の建物、築30年以上でリフォーム・リノベの記載がない部屋は除いています。品川区・目黒区・渋谷区・港区を先に並べています。</p>
+  </header>
+  <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全__TOTAL__件</span></div><span>取得日 __DATE__ ・ SUUMO / LIFULL HOME'S / at home / CHINTAI</span></div>
+  <section class="panel" aria-label="絞り込み">
+    <div class="row"><span class="lab">区</span><div class="chips" id="wards"></div></div>
+    <div class="row">
+      <span class="lab">条件</span>
+      <label class="f">町名 <select id="town"></select></label>
+      <label class="f">家賃 <select id="rent"><option value="22">22万円以下</option><option value="20">20万円以下</option><option value="18">18万円以下</option><option value="16">16万円以下</option></select></label>
+      <label class="f"><input type="checkbox" id="incl"> 管理費込みで判定</label>
+      <label class="f">広さ <select id="area"><option value="45">45㎡以上</option><option value="50">50㎡以上</option><option value="55">55㎡以上</option><option value="60">60㎡以上</option><option value="70">70㎡以上</option></select></label>
+      <label class="f">徒歩 <select id="walk"><option value="99">指定なし</option><option value="5">5分以内</option><option value="7">7分以内</option><option value="10">10分以内</option><option value="15">15分以内</option></select></label>
+      <label class="f">築年 <select id="age"><option value="999">指定なし</option><option value="5">5年以内</option><option value="10">10年以内</option><option value="20">20年以内</option><option value="30">30年以内</option></select></label>
+    </div>
+    <div class="row">
+      <span class="lab">表示</span>
+      <label class="f">改装の記載なしを除外 <select id="rfr"><option value="30">築30年以上</option><option value="40">築40年以上</option><option value="999">除外しない</option></select></label>
+      <label class="f"><input type="checkbox" id="nogr"> 1983年3月以前の竣工を隠す</label>
+      <label class="f"><input type="checkbox" id="ldk"> LDKのある間取りのみ</label>
+      <label class="f"><input type="checkbox" id="fav"> 保存した部屋のみ</label>
+      <label class="f"><input type="checkbox" id="showout"> 外した物件を表示（<span id="outn">0</span>件）</label>
+      <label class="f">サイト <select id="site"><option value="">すべて</option><option>SUUMO</option><option>HOME'S</option><option>at home</option><option>CHINTAI</option></select></label>
+      <label class="f">検索 <input type="search" id="q" placeholder="建物名・駅名"></label>
+      <label class="f">並び順 <select id="sort"><option value="pri">優先区 → 安い順</option><option value="new">新着順</option><option value="total">総額が安い順</option><option value="area">広い順</option><option value="unit">㎡単価が安い順</option><option value="walk">駅が近い順</option><option value="age">築浅順</option></select></label>
+    </div>
+  </section>
+  <div class="list" id="list"></div>
+  <button class="more" id="more" type="button" hidden>次の50件を表示</button>
+  <footer class="note">
+    <strong>確認していただきたいこと</strong>
+    <ul>
+      <li>__DATE__時点の掲載情報です。空室状況と条件は変わるので、問い合わせ前に各サイトの詳細ページで確認してください。</li>
+      <li>定期借家は一覧の表示をもとに除外しています。契約形態は詳細ページでも確認してください。</li>
+      <li>家賃22万円は管理費を含めずに判定しています。管理費込みで見る場合は「管理費込みで判定」を選んでください。</li>
+      <li>同じ町丁目で家賃・面積・間取りが同じ掲載は、同じ部屋とみなして1件にまとめています。同じ建物の別の階が1件にまとまる場合があります。</li>
+      <li>新耐震の判定は竣工年月によります。基準は確認申請が1981年6月1日以降かどうかなので、1981年6月から1983年3月の竣工は旧基準で申請された可能性があり、「耐震を要確認」と表示しています。</li>
+      <li>リフォーム・リノベは掲載文の記載で判定しています。一部の設備交換だけの部屋も「記載あり」に含まれ、実際に改装していても記載がなければ除外されます。</li>
+      <li>「いらない」を押すと GitHub の画面が開きます。「Create」を押すと、約1分でこのリストを見ている全員の画面とLINEの通知から外れます（GitHub へのログインが必要です。押した端末ではすぐに消えます）。外した物件は「外した物件を表示」から戻せます。</li>
+    </ul>
+  </footer>
+</div>
+<script>
+const DATA=__DATA__;
+const PRI=['品川区','目黒区','渋谷区','港区'],HL=['目黒区','品川区'];
+const WARDS=['品川区','目黒区','渋谷区','港区','新宿区','千代田区','中央区','文京区','江東区','世田谷区'];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const idOf=d=>[d.w,d.t,d.c,d.r,d.a,d.l].join('|');
+const REPO='__REPO__';
+let EXCL=new Set(__EXCL__);
+const ls=(k,v)=>{try{if(v===undefined)return new Set(JSON.parse(localStorage.getItem(k)||'[]'));localStorage.setItem(k,JSON.stringify([...v]))}catch(e){return new Set()}};
+const pend=ls('excl'),back=ls('back');
+const isOut=d=>(EXCL.has(d.k)&&!back.has(d.k))||pend.has(d.k);
+const issueUrl=(verb,d)=>`https://github.com/${REPO}/issues/new?title=${encodeURIComponent(verb+': '+d.w+' '+d.t+(d.c?d.c+'丁目':'')+' '+(d.n||'')+' '+d.r+'万円 '+d.l+' '+d.a+'㎡')}&body=${encodeURIComponent('key: '+d.k+'\n\nこのまま「Create」を押してください。')}`;
+async function loadExcl(){try{const ex=new Set(),is=[];
+  for(let p=1;p<=5;p++){const r=await fetch(`https://api.github.com/repos/${REPO}/issues?state=all&creator=${REPO.split('/')[0]}&per_page=100&page=${p}`,{cache:'no-store'});if(!r.ok)return;const a=await r.json();is.push(...a);if(a.length<100)break;}
+  is.sort((a,b)=>a.number-b.number).forEach(i=>{const m=/^key: (.+)$/m.exec(i.body||'');if(!m)return;const k=m[1].trim();if(/^いらない/.test(i.title))ex.add(k);else if(/^戻す/.test(i.title))ex.delete(k);});
+  EXCL=ex;[...pend].forEach(k=>{if(EXCL.has(k))pend.delete(k)});[...back].forEach(k=>{if(!EXCL.has(k))back.delete(k)});ls('excl',pend);ls('back',back);render();}catch(e){}}
+let favs=new Set();try{favs=new Set(JSON.parse(localStorage.getItem('favs')||'[]'))}catch(e){}
+const saveFavs=()=>{try{localStorage.setItem('favs',JSON.stringify([...favs]))}catch(e){}};
+const active=new Set(WARDS);let shown=50;
+const counts={};DATA.forEach(d=>counts[d.w]=(counts[d.w]||0)+1);
+$('wards').innerHTML=WARDS.filter(w=>counts[w]).map(w=>`<button type="button" class="chip${PRI.includes(w)?' pri':''}" data-w="${w}" aria-pressed="true">${w}<small>${counts[w]}</small></button>`).join('')
+ +'<span class="sep"></span><button type="button" class="chip" id="onlypri" aria-pressed="false">優先4区のみ</button>';
+function fillTowns(){const cur=$('town').value;const m={};DATA.filter(d=>active.has(d.w)).forEach(d=>{const k=d.w+' '+d.t;m[k]=(m[k]||0)+1});
+ $('town').innerHTML='<option value="">すべて</option>'+Object.keys(m).sort((a,b)=>WARDS.indexOf(a.split(' ')[0])-WARDS.indexOf(b.split(' ')[0])||a.localeCompare(b,'ja')).map(k=>`<option value="${esc(k)}">${esc(k)}（${m[k]}）</option>`).join('');
+ if(m[cur])$('town').value=cur;}
+const total=d=>d.r+d.f/10000;
+function filtered(){const rent=+$('rent').value,area=+$('area').value,wk=+$('walk').value,ag=+$('age').value,town=$('town').value,site=$('site').value,q=$('q').value.trim();
+ const so=$('showout').checked;const out=DATA.filter(d=>{if(isOut(d)!==so)return false;if(!active.has(d.w))return false;if(town&&d.w+' '+d.t!==town)return false;
+  if(($('incl').checked?total(d):d.r)>rent)return false;if(d.a<area)return false;
+  if(wk<99&&(d.wk==null||d.wk>wk))return false;if(ag<999&&(d.ag==null||d.ag>ag))return false;
+  if(d.ag>=+$('rfr').value&&!d.rf)return false;if($('nogr').checked&&d.gr)return false;if($('ldk').checked&&!/L/.test(d.l))return false;if($('fav').checked&&!favs.has(idOf(d)))return false;
+  if(site&&!d.ln[site])return false;if(q&&!(d.n+d.s.join(' ')+d.t).includes(q))return false;return true;});
+ const s=$('sort').value,nz=v=>v==null?9999:v;
+ const by={new:(a,b)=>(b.d||'').localeCompare(a.d||'')||total(a)-total(b),pri:(a,b)=>WARDS.indexOf(a.w)-WARDS.indexOf(b.w)||total(a)-total(b),total:(a,b)=>total(a)-total(b),area:(a,b)=>b.a-a.a,unit:(a,b)=>total(a)/a.a-total(b)/b.a,walk:(a,b)=>nz(a.wk)-nz(b.wk)||total(a)-total(b),age:(a,b)=>nz(a.ag)-nz(b.ag)||total(a)-total(b)}[s];
+ return out.sort(by);}
+const BASE='2026-11-06',md=s=>s?+s.slice(5,7)+'/'+ +s.slice(8,10)+(s.length>10?' '+ +s.slice(11,13)+'時':''):'',isNew=d=>d.d&&d.d>BASE&&(Date.now()-new Date(d.d.slice(0,10)+'T00:00'))/864e5<=7;
+function card(d){const id=idOf(d);const links=Object.entries(d.ln).map(([k,u])=>`<a class="go" href="${esc(u)}" target="_blank" rel="noopener">${esc(k)}</a>`).join('');
+ const dep=[d.sk&&d.sk!=='-'?'敷 '+d.sk:'',d.rk&&d.rk!=='-'?'礼 '+d.rk:''].filter(Boolean).join(' / ');
+ return `<article class="item${HL.includes(d.w)?' hl':''}"><div class="price"><b>${d.r}<i>万円</i></b><div>管理費 ${d.f?d.f.toLocaleString()+'円':'なし・不明'}</div><div>総額 ${total(d).toFixed(2).replace(/0$/,'')}万円</div></div>
+ <div><div class="name"><span class="tag${HL.includes(d.w)?' hl':''}">${esc(d.w)}</span>${isNew(d)?`<span class="tag m">新着 ${md(d.d)}</span>`:''}${d.gr?'<span class="tag w">耐震を要確認</span>':''}${esc(d.n||'建物名なし')}</div>
+ <div class="spec"><span><strong>${esc(d.l)}</strong></span><span><strong>${d.a}</strong>㎡</span><span>${d.ym?esc(d.ym)+'築（築'+d.ag+'年）':d.ag===0?'新築':'築'+d.ag+'年'}</span>${d.ty?`<span>${esc(d.ty)}</span>`:''}${d.fl?`<span>${esc(d.fl)}</span>`:''}</div>
+ <div class="sub">${esc(d.t)}${d.c?esc(d.c)+'丁目':''}${dep?' ・ '+esc(dep):''}</div><div class="sub">${esc(d.s.join(' ／ '))}</div><div class="sub">${d.d&&d.d>BASE?'見つけた日 '+md(d.d):md(BASE)+'以前から掲載'}</div>${d.rf?`<div class="sub rf">改装の記載: ${esc(d.rf)}</div>`:''}</div>
+ <div class="acts">${links}<button type="button" class="star" data-id="${esc(id)}" aria-pressed="${favs.has(id)}">${favs.has(id)?'保存済み':'保存'}</button>${isOut(d)?(EXCL.has(d.k)?`<a class="nope" data-back="${esc(d.k)}" href="${esc(issueUrl('戻す',d))}" target="_blank" rel="noopener">戻す</a>`:`<a class="nope" data-back="${esc(d.k)}" href="#">戻す</a>`):`<a class="nope" data-out="${esc(d.k)}" href="${esc(issueUrl('いらない',d))}" target="_blank" rel="noopener">いらない</a>`}</div></article>`;}
+function render(){const r=filtered();$('cnt').textContent=r.length.toLocaleString();$('outn').textContent=DATA.filter(isOut).length;
+ $('list').innerHTML=r.length?r.slice(0,shown).map(card).join(''):`<div class="empty">${$('showout').checked?'外した物件はありません。':'条件に合う部屋がありません。家賃や広さの条件を緩めてください。'}</div>`;
+ $('more').hidden=r.length<=shown;}
+function reset(){shown=50;render();}
+$('wards').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ if(b.id==='onlypri'){const on=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',on);active.clear();WARDS.forEach(w=>{if(!on||PRI.includes(w))active.add(w)});
+  document.querySelectorAll('[data-w]').forEach(x=>x.setAttribute('aria-pressed',active.has(x.dataset.w)));}
+ else{const w=b.dataset.w;active.has(w)?active.delete(w):active.add(w);b.setAttribute('aria-pressed',active.has(w));$('onlypri').setAttribute('aria-pressed','false');}
+ fillTowns();reset();});
+['rfr','nogr','town','rent','incl','area','walk','age','ldk','showout','fav','site','sort'].forEach(i=>$(i).addEventListener('change',reset));
+$('q').addEventListener('input',reset);
+$('more').addEventListener('click',()=>{shown+=50;render();});
+$('list').addEventListener('click',e=>{const o=e.target.closest('[data-out],[data-back]');if(o){
+  if(o.dataset.out){pend.add(o.dataset.out);back.delete(o.dataset.out);}else{if(o.getAttribute('href')==='#')e.preventDefault();pend.delete(o.dataset.back);if(EXCL.has(o.dataset.back))back.add(o.dataset.back);}
+  ls('excl',pend);ls('back',back);setTimeout(render,50);return;}
+ const b=e.target.closest('.star');if(!b)return;const id=b.dataset.id;favs.has(id)?favs.delete(id):favs.add(id);saveFavs();const on=favs.has(id);b.setAttribute('aria-pressed',on);b.textContent=on?'保存済み':'保存';if($('fav').checked)render();});
+fillTowns();render();loadExcl();document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadExcl()});
+</script>
