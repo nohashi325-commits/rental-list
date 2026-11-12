@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: '7 0,3,6,9,12,15 * * *'   # UTC。日本時間の 9・12・15・18・21・0時7分
   workflow_dispatch:
+    inputs:
+      test_line:
+        description: 'LINE のテストを自分にだけ送る（物件は探さない）'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -37,7 +42,7 @@ jobs:
       - run: pip install beautifulsoup4==4.15.0
 
       - name: 新着を探して通知
-        run: python -I bot/watch.py
+        run: python -I bot/watch.py ${{ inputs.test_line && '--test-line' || '' }}
         env:
           LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
           LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
