@@ -547,7 +547,8 @@ def main():
         print(publish_site(json.load(open(os.path.join(HERE, 'list.json'), encoding='utf-8')), exclusions()))
         return
     rows, status = [], {}
-    ts = [threading.Thread(target=crawl, args=(k, rows, status)) for k in SITES]
+    sites = [k for k in SITES if not (CLOUD and k == 'goo')]   # goo はクラウド（GitHub）からのアクセスを断る（403）ので、クラウドでは読まない
+    ts = [threading.Thread(target=crawl, args=(k, rows, status)) for k in sites]
     [t.start() for t in ts]
     [t.join() for t in ts]
     groups = qualify(rows)
