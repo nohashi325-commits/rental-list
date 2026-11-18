@@ -1,0 +1,14 @@
+name: probe
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
+          for cd in 13109 13110 13113 13103 13104; do
+            curl -sL -m 40 -A "$UA" -H 'Accept-Language: ja' "https://house.goo.ne.jp/rent/shuto_ap/area_tokyo/$cd.html?ru=22&fl=45&ftl=1&ps=50&lo[]=lo0205" -o p.html -w "goo $cd %{http_code} %{size_download} "
+            grep -o '<title>[^<]*' p.html | head -1; grep -c 'name_id' p.html
+            sleep 3
+          done
+          curl -sL -m 40 -A "$UA" "https://www.chintai.net/" -o c.html -w "chintai %{http_code} %{size_download}\n"
