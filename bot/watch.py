@@ -1,6 +1,6 @@
 """賃貸の新着チェック。
 
-SUUMO / LIFULL HOME'S / CHINTAI / at home を検索し、条件に合う新着の部屋を
+SUUMO / LIFULL HOME'S / CHINTAI / at home / goo住宅・不動産 を検索し、条件に合う新着の部屋を
 LINE に送る（line.json があるとき）。条件に合う今の掲載の一覧は「メモ」の「賃貸」フォルダに書く（iCloud で iPhone に届く）。
   python watch.py              新着を探して通知し、一覧を書き直す（0・9・12・15・18・21時ごろに GitHub Actions から実行）
   python watch.py --init       今の掲載をすべて既知として記録する（通知しない）
@@ -160,6 +160,28 @@ def p_athome(doc):
     return out
 
 
+def p_goo(doc):
+    """goo住宅・不動産。SUUMO・HOME'S・at home などの掲載をまとめて載せているので、at home で止められた分もここで拾える。"""
+    out = []
+    for b in doc.select('.name_id'):
+        t = T(b)
+        addr = (re.search(r'東京都\S+', t) or [''])[0]
+        st = re.findall(r'\S+駅 徒歩\d+分', t)[:1]
+        age = (re.search(r'(新築|築\d+年)', t) or [''])[0]
+        name = T(b.find(['h2', 'h3', 'a'])) or t[:20]
+        for pr in b.select('.property'):
+            m = re.search(r'([\d.]+) 万円', T(pr))
+            lm = re.search(r'(\d[SLDK]+|\dK)\S*\s+([\d.]+)m', T(pr.select_one('.property-madori')))
+            a = pr.select_one('a[href*="/detail/"]') or b.select_one('a[href*="/detail/"]')
+            if not (m and lm and a):
+                continue
+            fee = T(pr.select_one('.property-kanri'))
+            out.append(dict(name=name, addr=addr, st=st, age=age, rent=m.group(1) + '万円', fee=fee if '円' in fee else '0円',
+                            layout=lm.group(1), area=lm.group(2) + '㎡', teiki=False,   # 定期借家は検索で除いている
+                            url='https://house.goo.ne.jp' + a['href'].split('?')[0]))
+    return out
+
+
 def u_suumo(s, cd, p):
     return ('https://suumo.jp/jj/chintai/ichiran/FR301FC005/?ar=030&bs=040&ta=13&sc=%d&cb=0.0&ct=22.0&mb=45&mt=9999999'
             '&md=07&md=08&md=09&md=10&md=11&md=12&md=13&md=14&et=9999999&cn=9999999&shkr1=03&shkr2=03&shkr3=03&shkr4=03&sngz=&po1=25&pc=100&page=%d' % (cd, p))
@@ -179,8 +201,13 @@ def u_athome(s, cd, p):
     return 'https://www.athome.co.jp/chintai/tokyo/%s-city/list/%s?%s' % (s, 'page%d/' % p if p > 1 else '', q)
 
 
+def u_goo(s, cd, p):
+    lo = ''.join('&lo[]=lo0%s' % c for c in ('205', '302', '303', '305', '402', '403', '405'))   # 2LDK・3K以上
+    return 'https://house.goo.ne.jp/rent/shuto_ap/area_tokyo/%d.html?ru=22&fl=45&ftl=1&ps=50%s%s' % (cd, lo, '&p=%d' % p if p > 1 else '')
+
+
 # サイトごとの (URL, 読み取り, アクセス間隔秒)。HOME'S と at home は間隔を空けないと止められる。
-SITES = {'SUUMO': (u_suumo, p_suumo, 2), "HOME'S": (u_homes, p_homes, 15), 'CHINTAI': (u_chintai, p_chintai, 2), 'at home': (u_athome, p_athome, 15)}
+SITES = {'SUUMO': (u_suumo, p_suumo, 2), "HOME'S": (u_homes, p_homes, 15), 'CHINTAI': (u_chintai, p_chintai, 2), 'at home': (u_athome, p_athome, 15), 'goo': (u_goo, p_goo, 3)}
 
 
 def crawl(site, rows, status):
@@ -311,7 +338,7 @@ def judge(g):
         return True, ''
     yms, rf = [], ''
     # 1サイト2件まで詳細を読む。SUUMO と CHINTAI を先に読む（HOME'S と at home は止められやすい）
-    for src in ['SUUMO', 'CHINTAI', "HOME'S", 'at home']:
+    for src in ['SUUMO', 'CHINTAI', 'goo', "HOME'S", 'at home']:
         for u in g['links'].get(src, [])[:2]:
             ym, r = detail(u)
             if ym:
