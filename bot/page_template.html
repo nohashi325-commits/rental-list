@@ -74,7 +74,7 @@ select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background
 <div class="wrap">
   <header>
     <h1>対象町名の賃貸リスト</h1>
-    <p class="lead">写真の町名にある、2LDK以上・45㎡以上・家賃22万円以下の部屋です。定期借家、旧耐震の建物、築30年以上でリフォーム・リノベの記載がない部屋は除いています。品川区・目黒区・渋谷区・港区を先に並べています。</p>
+    <p class="lead">写真の町名にある、2LDK以上・45㎡以上・家賃23万円以下の部屋です。定期借家、旧耐震の建物、築30年以上でリフォーム・リノベの記載がない部屋は除いています。品川区・目黒区・渋谷区・港区を先に並べています。</p>
   </header>
   <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全__TOTAL__件</span></div><span>取得日 __DATE__ ・ SUUMO / LIFULL HOME'S / at home / CHINTAI / goo</span></div>
   <section class="panel" aria-label="絞り込み">
@@ -82,7 +82,7 @@ select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background
     <div class="row">
       <span class="lab">条件</span>
       <label class="f">町名 <select id="town"></select></label>
-      <label class="f">家賃 <select id="rent"><option value="22">22万円以下</option><option value="20">20万円以下</option><option value="18">18万円以下</option><option value="16">16万円以下</option></select></label>
+      <label class="f">家賃 <select id="rent"><option value="23">23万円以下</option><option value="22">22万円以下</option><option value="20">20万円以下</option><option value="18">18万円以下</option><option value="16">16万円以下</option></select></label>
       <label class="f"><input type="checkbox" id="incl"> 管理費込みで判定</label>
       <label class="f">広さ <select id="area"><option value="45">45㎡以上</option><option value="50">50㎡以上</option><option value="55">55㎡以上</option><option value="60">60㎡以上</option><option value="70">70㎡以上</option></select></label>
       <label class="f">徒歩 <select id="walk"><option value="99">指定なし</option><option value="5">5分以内</option><option value="7">7分以内</option><option value="10">10分以内</option><option value="15">15分以内</option></select></label>
@@ -107,7 +107,7 @@ select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background
     <ul>
       <li>__DATE__時点の掲載情報です。空室状況と条件は変わるので、問い合わせ前に各サイトの詳細ページで確認してください。</li>
       <li>定期借家は一覧の表示をもとに除外しています。契約形態は詳細ページでも確認してください。</li>
-      <li>家賃22万円は管理費を含めずに判定しています。管理費込みで見る場合は「管理費込みで判定」を選んでください。</li>
+      <li>家賃23万円は管理費を含めずに判定しています。管理費込みで見る場合は「管理費込みで判定」を選んでください。</li>
       <li>同じ町丁目で家賃・面積・間取りが同じ掲載は、同じ部屋とみなして1件にまとめています。同じ建物の別の階が1件にまとまる場合があります。</li>
       <li>新耐震の判定は竣工年月によります。基準は確認申請が1981年6月1日以降かどうかなので、1981年6月から1983年3月の竣工は旧基準で申請された可能性があり、「耐震を要確認」と表示しています。</li>
       <li>リフォーム・リノベは掲載文の記載で判定しています。一部の設備交換だけの部屋も「記載あり」に含まれ、実際に改装していても記載がなければ除外されます。</li>

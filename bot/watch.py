@@ -26,7 +26,7 @@ NEW_DAYS = 7          # 一覧で🆕を付ける日数
 LIST_URL = 'https://nohashi325-commits.github.io/rental-list/'   # LINE で知らせる一覧ページ（GitHub Pages）
 UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36'
 
-RENT_MAX = 22.0       # 万円（管理費を含まない）
+RENT_MAX = 23.0       # 万円（管理費を含まない）
 AREA_MIN = 45.0       # ㎡
 REFORM_AGE = 30       # 築この年数以上はリフォーム・リノベの記載がある部屋だけ残す
 OLD_AGE = 47          # 築この年数以上は旧耐震として詳細を見ずに除外
@@ -183,12 +183,12 @@ def p_goo(doc):
 
 
 def u_suumo(s, cd, p):
-    return ('https://suumo.jp/jj/chintai/ichiran/FR301FC005/?ar=030&bs=040&ta=13&sc=%d&cb=0.0&ct=22.0&mb=45&mt=9999999'
+    return ('https://suumo.jp/jj/chintai/ichiran/FR301FC005/?ar=030&bs=040&ta=13&sc=%d&cb=0.0&ct=23.0&mb=45&mt=9999999'
             '&md=07&md=08&md=09&md=10&md=11&md=12&md=13&md=14&et=9999999&cn=9999999&shkr1=03&shkr2=03&shkr3=03&shkr4=03&sngz=&po1=25&pc=100&page=%d' % (cd, p))
 
 
 def u_homes(s, cd, p):
-    q = 'cond%5Bmonthmoneyroomh%5D=22&cond%5Bhousearea%5D=45' + ''.join('&cond%%5Bmadori%%5D%%5B%s%%5D=%s' % (m, m) for m in ['25', '32', '33', '35', '42', '43', '45-'])
+    q = 'cond%5Bmonthmoneyroomh%5D=23&cond%5Bhousearea%5D=45' + ''.join('&cond%%5Bmadori%%5D%%5B%s%%5D=%s' % (m, m) for m in ['25', '32', '33', '35', '42', '43', '45-'])
     return 'https://www.homes.co.jp/chintai/tokyo/%s-city/list/?%s&page=%d' % (s, q, p)
 
 
@@ -203,7 +203,7 @@ def u_athome(s, cd, p):
 
 def u_goo(s, cd, p):
     lo = ''.join('&lo[]=lo0%s' % c for c in ('205', '302', '303', '305', '402', '403', '405'))   # 2LDK・3K以上
-    return 'https://house.goo.ne.jp/rent/shuto_ap/area_tokyo/%d.html?ru=22&fl=45&ftl=1&ps=50%s%s' % (cd, lo, '&p=%d' % p if p > 1 else '')
+    return 'https://house.goo.ne.jp/rent/shuto_ap/area_tokyo/%d.html?ru=23&fl=45&ftl=1&ps=50%s%s' % (cd, lo, '&p=%d' % p if p > 1 else '')
 
 
 # サイトごとの (URL, 読み取り, アクセス間隔秒)。HOME'S と at home は間隔を空けないと止められる。
