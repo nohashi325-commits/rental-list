@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 HERE = os.path.dirname(os.path.abspath(__file__))
 CLOUD = bool(os.environ.get('GITHUB_ACTIONS'))   # GitHub Actions で動いているとき（リポジトリの bot/ にある）
 SEEN = os.path.join(HERE, 'seen.json')
+GOO_ROWS = os.path.join(HERE, 'goo_rows.json')   # Mac が読んだ goo の条件内の部屋（goo はクラウドからのアクセスを断るため）
 VERDICTS = os.path.join(HERE, 'verdicts.json')   # 詳細ページまで見た判定の記録 {key: [残すか, 補足]}
 LINE_CFG = os.path.join(HERE, 'line.json')        # {"token": ..., "user_id": ...}。line_setup.sh で作る
 LOG = os.path.join(HERE, 'log.txt')
@@ -374,7 +375,7 @@ def judge(g):
     yms, rf = [], ''
     # 1サイト2件まで詳細を読む。SUUMO と CHINTAI を先に読む（HOME'S と at home は止められやすい）
     for src in ['SUUMO', 'CHINTAI', 'goo', 'Yahoo', "HOME'S", 'at home']:
-        for u in g['links'].get(src, [])[:2]:
+        for u in g['links'].get(src, [])[:2] if not (CLOUD and src == 'goo') else []:
             ym, r = detail(u)
             if ym:
                 yms.append(ym)
@@ -581,11 +582,27 @@ def main():
     if mode == '--site':
         print(publish_site(json.load(open(os.path.join(HERE, 'list.json'), encoding='utf-8')), exclusions()))
         return
+    if mode == '--goo':
+        # Mac 用：goo だけ読み、条件内の部屋を goo_rows.json に書く（push は goo_sync.sh が行う）
+        rows, status = [], {}
+        crawl('goo', rows, status)
+        keep = [r for r in rows if qualify([r])]
+        json.dump(dict(at=datetime.datetime.now().isoformat(timespec='minutes'), status=status['goo'], total=len(rows), rows=keep),
+                  open(GOO_ROWS, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+        log('goo 取得 %d件 / 条件内 %d件 / 状態 %s' % (len(rows), len(keep), status['goo']))
+        return
     rows, status = [], {}
     sites = [k for k in SITES if not (CLOUD and k == 'goo')]   # goo はクラウド（GitHub）からのアクセスを断る（403）ので、クラウドでは読まない
     ts = [threading.Thread(target=crawl, args=(k, rows, status)) for k in sites]
     [t.start() for t in ts]
     [t.join() for t in ts]
+    if CLOUD and os.path.exists(GOO_ROWS):
+        gd = json.load(open(GOO_ROWS, encoding='utf-8'))
+        age_h = (datetime.datetime.now() - datetime.datetime.fromisoformat(gd['at'])).total_seconds() / 3600
+        if age_h < 3:   # Mac がついていた回だけ使う。古ければ goo は無いものとして扱う（失敗扱いにはしない）
+            rows.extend(gd['rows'])
+            status['goo'] = gd['status']
+        log('goo（Mac で取得）%s時点 %d件 %s' % (gd['at'], len(gd['rows']), '使う' if age_h < 3 else '古いので使わない'))
     groups = qualify(rows)
     seen = json.load(open(SEEN, encoding='utf-8')) if os.path.exists(SEEN) else {}
     verdicts = json.load(open(VERDICTS, encoding='utf-8')) if os.path.exists(VERDICTS) else {}
