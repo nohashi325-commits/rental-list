@@ -120,26 +120,24 @@ def p_homes(doc):
 
 
 def p_chintai(doc):
+    # 2026-11-17ごろの新しい一覧ページ。建物ごとの section.c-building の中に部屋ごとの article.c-cassette-list がある（PR枠は読まない）
     out = []
-    for b in doc.select('section.cassette_item.build'):
-        h = b.find('h2')
-        ty = T(h.find('span')) if h and h.find('span') else ''
-        cells = {T(th): th.find_next_sibling('td') for th in b.select('.bukken_information th')}
-        ad = cells.get('住所')
-        st = [T(x) for x in cells['交通'].select('li')] if cells.get('交通') else []
-        for tb in b.select('tbody.js-detailLinkUrl'):
-            tr = tb.select_one('tr.detail-inner')
-            if not tr:
-                continue
-            pr = tr.select_one('td.price')
-            parts = pr.get_text('|', strip=True).split('|') if pr else []
-            ly = next((td for td in tr.find_all('td') if 'm²' in T(td)), None)
-            lp = ly.get_text('|', strip=True).split('|') if ly else []
-            out.append(dict(name=T(h).replace(ty, '', 1).strip() if h else '', addr=T(ad.contents[0]) if ad and ad.contents else '',
-                            age=T(cells.get('築年')), st=st, rent=T(pr.select_one('.num')) + '万円' if pr else '',
-                            fee=parts[-1] if len(parts) > 1 and '円' in parts[-1] else '-',
-                            layout=lp[0] if lp else '', area=lp[1] if len(lp) > 1 else '', teiki='定期借家' in T(tb),
-                            url='https://www.chintai.net' + tb.get('data-detailurl', '')))
+    for b in doc.select('section.c-building'):
+        h = b.select_one('.c-building__name')
+        meta = [T(p) for p in b.select('.c-building__meta-text')]
+        st = [T(p) for p in b.select('.c-building__meta-text') if p.select_one('.c-building__meta-station')]
+        addr = next((m for m in meta if m.startswith('東京都')), '')
+        age = next((m for m in meta if '築' in m or '新築' in m), '')
+        for r in b.select('article.c-cassette-list'):
+            a = r.select_one('a.c-cassette-list__overlay[href]')
+            sp = r.select_one('.c-cassette-list__spec')
+            sps = sp.find_all('span', recursive=False) if sp else []
+            fee = r.select_one('.c-cassette-list__price-sub')
+            num = r.select_one('.c-cassette-list__price-num')
+            out.append(dict(name=T(h) if h else '', addr=addr, age=age, st=st,
+                            rent=T(num) + '万円' if num else '', fee=T(fee).strip('（）()') if fee else '-',
+                            layout=T(sps[0]) if sps else '', area=T(sps[1]) if len(sps) > 1 else '', teiki='定期借家' in T(r),
+                            url='https://www.chintai.net' + a['href'].split('?')[0] if a else ''))
     return out
 
 
@@ -193,7 +191,8 @@ def u_homes(s, cd, p):
 
 
 def u_chintai(s, cd, p):
-    return 'https://www.chintai.net/tokyo/area/%d/list/%s?ct=250&sf=45&m=6&m=7&m=8&m=9&m=A&m=B&m=C&m=D&m=E&n=B' % (cd, 'page%d/' % p if p > 1 else '')
+    # kj=KA は「定期借家を含まない」。m は 2DK〜5LDK以上
+    return 'https://www.chintai.net/list/area/tokyo/%d/?ct=250&sf=45&kj=KA%s%s' % (cd, ''.join('&m=' + c for c in '6789ABCDEF'), '&p=%d' % p if p > 1 else '')
 
 
 def u_athome(s, cd, p):
