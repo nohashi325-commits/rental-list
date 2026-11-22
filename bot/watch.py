@@ -205,8 +205,36 @@ def u_goo(s, cd, p):
     return 'https://house.goo.ne.jp/rent/shuto_ap/area_tokyo/%d.html?ru=23&fl=45&ftl=1&ps=50%s%s' % (cd, lo, '&p=%d' % p if p > 1 else '')
 
 
+def p_yahoo(doc):
+    # Yahoo!不動産。建物ごとの .ListBukken__item の中に部屋ごとの .ListCassetteRoom__item がある
+    out = []
+    for b in doc.select('.ListBukken__item'):
+        txt = [T(x) for x in b.select('.ListCassette__txt')]
+        addr = next((t for t in txt if t.startswith('東京都')), '')
+        age = next((t.split('/')[0] for t in txt if t.startswith('築') or t.startswith('新築')), '')
+        st = [t for t in txt if '駅' in t][:1]
+        name = T(b.select_one('.ListCassette__ttl__txt'))
+        for r in b.select('.ListCassetteRoom__item'):
+            a = r.select_one('a.ListCassetteRoom__textLink[href]')
+            pr = r.select_one('.ListCassetteRoom__dtl__price')
+            parts = pr.get_text('|', strip=True).split('|') if pr else []
+            ly = r.select('.ListCassetteRoom__dtl__layout')
+            for s in r.select('.ListCassetteRoom__dtl__layout sup'):
+                s.decompose()
+            fee = next((re.sub(r'^管理費等\s*', '', x) for x in parts[1:] if '円' in x), '-')
+            out.append(dict(name=name, addr=addr, age=age, st=st, rent=parts[0] if parts else '', fee=fee,
+                            layout=T(ly[0]) if ly else '', area=T(ly[1]).rstrip('m') + '㎡' if len(ly) > 1 else '',
+                            teiki='定期借家' in T(r),
+                            url='https://realestate.yahoo.co.jp' + a['href'].split('?')[0] if a else ''))
+    return out
+
+
+def u_yahoo(s, cd, p):
+    return 'https://realestate.yahoo.co.jp/rent/search/03/13/%d/?rent_to=%d&ma_from=45%s' % (cd, int(RENT_MAX * 10000), '&page=%d' % p if p > 1 else '')
+
+
 # サイトごとの (URL, 読み取り, アクセス間隔秒)。HOME'S と at home は間隔を空けないと止められる。
-SITES = {'SUUMO': (u_suumo, p_suumo, 2), "HOME'S": (u_homes, p_homes, 15), 'CHINTAI': (u_chintai, p_chintai, 2), 'at home': (u_athome, p_athome, 15), 'goo': (u_goo, p_goo, 3)}
+SITES = {'SUUMO': (u_suumo, p_suumo, 2), "HOME'S": (u_homes, p_homes, 15), 'CHINTAI': (u_chintai, p_chintai, 2), 'at home': (u_athome, p_athome, 15), 'goo': (u_goo, p_goo, 3), 'Yahoo': (u_yahoo, p_yahoo, 3)}
 
 
 def crawl(site, rows, status):
@@ -219,6 +247,8 @@ def crawl(site, rows, status):
             items = [] if d is None else [x for x in pf(d) if x['url'] and x['url'] not in seen]
             if not items and p == 1 and w in PRIORITY:
                 empty += 1   # 優先4区はどのサイトにも普段は掲載があるので、0件はアクセス制限の可能性が高い
+                t = d.title.get_text(strip=True)[:40] if d is not None and d.title else '取得失敗'
+                log('%s %s 1ページ目 0件（%s）' % (site, w, t))
             for x in items:
                 seen.add(x['url'])
                 x['ward'], x['src'] = w, site
@@ -240,7 +270,7 @@ def split_addr(addr, ward):
     if m:
         return m.group(1), str('一二三四五六七八九'.index(m.group(2)) + 1)
     m = re.match(r'^([^\d-]*)(\d+)?', a)
-    return m.group(1).strip(), m.group(2) or ''
+    return m.group(1).strip(), str(int(m.group(2))) if m.group(2) else ''   # Yahoo は「戸越006」のように書くことがある
 
 
 def man(s):
@@ -330,6 +360,12 @@ def qualify(rows):
 
 def judge(g):
     """新耐震かつ、築30年以上ならリフォーム記載ありの部屋だけ残す。(残すか, 補足)"""
+    if set(g['links']) == {'Yahoo'}:
+        # Yahoo の一覧には定期借家かどうかが出ないので、Yahoo にしかない部屋は詳細ページで確かめる
+        d = get(g['links']['Yahoo'][0])
+        time.sleep(3)
+        if d is not None and re.search(r'条件等\s*[^契]{0,30}定期借家', re.sub(r'\s+', ' ', d.get_text(' '))):
+            return False, ''
     age = min(g['ages']) if g['ages'] else None
     if age is not None and age >= OLD_AGE:
         return False, ''
@@ -337,7 +373,7 @@ def judge(g):
         return True, ''
     yms, rf = [], ''
     # 1サイト2件まで詳細を読む。SUUMO と CHINTAI を先に読む（HOME'S と at home は止められやすい）
-    for src in ['SUUMO', 'CHINTAI', 'goo', "HOME'S", 'at home']:
+    for src in ['SUUMO', 'CHINTAI', 'goo', 'Yahoo', "HOME'S", 'at home']:
         for u in g['links'].get(src, [])[:2]:
             ym, r = detail(u)
             if ym:
@@ -566,7 +602,14 @@ def main():
         json.dump(seen, open(SEEN, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
         log('既知として %d件を記録（通知なし）' % len(groups))
         return
-    new = [g for k, g in groups.items() if k not in seen]
+    def known(g):
+        if g['key'] in seen:
+            return True
+        # 丁目が書かれていない掲載（Yahoo に多い）は、丁目以外が同じ部屋を記録済みなら同じ部屋とみなす
+        rest = lambda k: k.split('|')[:2] + k.split('|')[3:]
+        return not g['chome'] and any(rest(k) == rest(g['key']) for k in seen)
+
+    new = [g for k, g in groups.items() if not known(g)]
     hits = []
     for g in new if mode != '--list' else []:
         ok, note = verdict(g)
