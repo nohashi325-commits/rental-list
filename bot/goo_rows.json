@@ -1,7 +1,7 @@
 {
-"at": "2026-11-22T22:30",
+"at": "2026-11-22T23:48",
 "status": "ok",
-"total": 2301,
+"total": 2354,
 "rows": [
 {
 "name": "東京都品川区荏原２丁目 築41年4ヶ月 10階建",
@@ -3936,6 +3936,374 @@
 "area": "63㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100537127806/175867001/x1030H100537127806.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "市谷左内坂ハイム",
+"addr": "東京都新宿区市谷左内町",
+"st": [
+"市ケ谷駅 徒歩5分"
+],
+"age": "築55年",
+"rent": "21万円",
+"fee": "7,000円",
+"layout": "2LDK",
+"area": "53.07㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100536565377/122740006/x1030H100536565377.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区大久保２ 築55年4ヶ月 13階建",
+"addr": "東京都新宿区大久保２",
+"st": [
+"新大久保駅 徒歩6分"
+],
+"age": "築55年",
+"rent": "22万円",
+"fee": "0円",
+"layout": "3LDK",
+"area": "63㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100536562745/176160001/x1030H100536562745.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "ライオンズマンション新大久保第２",
+"addr": "東京都新宿区百人町２",
+"st": [
+"新大久保駅 徒歩2分"
+],
+"age": "築43年",
+"rent": "22万円",
+"fee": "15,000円",
+"layout": "2LDK",
+"area": "45.89㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100536453959/152509004/x1030H100536453959.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区百人町２ 築43年1ヶ月 10階建",
+"addr": "東京都新宿区百人町２",
+"st": [
+"新大久保駅 徒歩2分"
+],
+"age": "築43年",
+"rent": "22万円",
+"fee": "15,000円",
+"layout": "2LDK",
+"area": "45.89㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100536260481/176160001/x1030H100536260481.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "カームフォレスト",
+"addr": "東京都新宿区大久保２",
+"st": [
+"新大久保駅 徒歩6分"
+],
+"age": "新築",
+"rent": "21.70万円",
+"fee": "22,000円",
+"layout": "2LDK",
+"area": "53.82㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535948362/178413001/x1030H100535948362.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "フォレストマンション",
+"addr": "東京都新宿区西新宿４",
+"st": [
+"初台駅 徒歩4分"
+],
+"age": "築41年",
+"rent": "16.60万円",
+"fee": "7,000円",
+"layout": "2LDK",
+"area": "52.42㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535740774/044320000/x1030H100535740774.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "フォレストマンション",
+"addr": "東京都新宿区西新宿４",
+"st": [
+"初台駅 徒歩4分"
+],
+"age": "築41年",
+"rent": "18.20万円",
+"fee": "7,000円",
+"layout": "3LDK",
+"area": "57.33㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100529230108/044320000/x1030H100529230108.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区百人町１ 築22年10ヶ月 9階建",
+"addr": "東京都新宿区百人町１",
+"st": [
+"新大久保駅 徒歩2分"
+],
+"age": "築22年",
+"rent": "22.70万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "51.37㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535520649/176160001/x1030H100535520649.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "信川ハイツ",
+"addr": "東京都新宿区市谷台町",
+"st": [
+"曙橋駅 徒歩6分"
+],
+"age": "築53年",
+"rent": "19.20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "56.2㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535590251/152509030/x1030H100535590251.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "信川ハイツ",
+"addr": "東京都新宿区市谷台町",
+"st": [
+"曙橋駅 徒歩6分"
+],
+"age": "築53年",
+"rent": "19.20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "56.1㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532752755/193221001/x1030H100532752755.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "アクサス西新宿",
+"addr": "東京都新宿区西新宿４",
+"st": [
+"西新宿五丁目駅 徒歩4分"
+],
+"age": "築11年",
+"rent": "22.40万円",
+"fee": "15,000円",
+"layout": "2LDK",
+"area": "51.24㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535315888/162382004/x1030H100535315888.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "Ｋ．ステートハウス四谷",
+"addr": "東京都新宿区若葉３",
+"st": [
+"信濃町駅 徒歩9分"
+],
+"age": "築59年",
+"rent": "20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "69.5㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535210827/150806001/x1030H100535210827.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "Ｋ．ステートハウス四谷",
+"addr": "東京都新宿区若葉３",
+"st": [
+"信濃町駅 徒歩9分"
+],
+"age": "築59年",
+"rent": "20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "69.5㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13104/1109048637/00160832/x01109048637.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区市谷台町 築53年11ヶ月 6階建",
+"addr": "東京都新宿区市谷台町",
+"st": [
+"曙橋駅 徒歩5分"
+],
+"age": "築53年",
+"rent": "19.20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "56.2㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100534573151/193199002/x1030H100534573151.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "ハイホーム本陣",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "22万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "56.4㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100534226025/100883037/x1030H100534226025.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "ハイホーム本陣",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "21.50万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "51.3㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100533357861/150806001/x1030H100533357861.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区富久町 築44年9ヶ月 14階建",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "21.50万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "51.3㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100533293679/188683001/x1030H100533293679.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区富久町 築44年9ヶ月 14階建",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "19万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "52.8㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13104/1172013230/00276821/x01172013230.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区富久町 築44年9ヶ月 14階建",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "20万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "52.8㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13104/1172013330/00276821/x01172013330.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区西新宿４ 築47年10ヶ月 13階建",
+"addr": "東京都新宿区西新宿４",
+"st": [
+"都庁前駅 徒歩8分"
+],
+"age": "築47年",
+"rent": "23万円",
+"fee": "10,000円",
+"layout": "3LDK",
+"area": "62.7㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100533354313/066835004/x1030H100533354313.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "ハイホーム市ヶ谷",
+"addr": "東京都新宿区南山伏町",
+"st": [
+"牛込神楽坂駅 徒歩4分"
+],
+"age": "築43年",
+"rent": "20.60万円",
+"fee": "18,000円",
+"layout": "2LDK",
+"area": "53.64㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532979835/081861002/x1030H100532979835.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "四谷グリーンマンション",
+"addr": "東京都新宿区須賀町",
+"st": [
+"四ツ谷駅 徒歩11分"
+],
+"age": "築58年",
+"rent": "11.50万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "46.45㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532417638/191707001/x1030H100532417638.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "東京都新宿区大久保２ 築16年4ヶ月 10階建",
+"addr": "東京都新宿区大久保２",
+"st": [
+"東新宿駅 徒歩8分"
+],
+"age": "築16年",
+"rent": "22.20万円",
+"fee": "8,000円",
+"layout": "8LDK",
+"area": "46.2㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532237825/185672004/x1030H100532237825.html",
 "ward": "新宿区",
 "src": "goo"
 },
