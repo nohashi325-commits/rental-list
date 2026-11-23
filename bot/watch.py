@@ -587,6 +587,16 @@ def main():
         rows, status = [], {}
         crawl('goo', rows, status)
         keep = [r for r in rows if qualify([r])]
+        # goo の「定期借家を除く」は備考欄にだけ書かれた定期借家を見逃すので、まだ記録にない部屋は詳細ページで確かめる
+        seen = json.load(open(SEEN, encoding='utf-8')) if os.path.exists(SEEN) else {}
+        for r in keep:
+            if next(iter(qualify([r]))) in seen:
+                continue
+            d = get(r['url'])
+            if d is not None and '定期借家' in d.get_text(' '):
+                r['teiki'] = True
+            time.sleep(3)
+        keep = [r for r in keep if not r['teiki']]
         json.dump(dict(at=datetime.datetime.now().isoformat(timespec='minutes'), status=status['goo'], total=len(rows), rows=keep),
                   open(GOO_ROWS, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
         log('goo 取得 %d件 / 条件内 %d件 / 状態 %s' % (len(rows), len(keep), status['goo']))
