@@ -364,7 +364,23 @@ def qualify(rows):
             g['walks'].append(w)
         g['st'] = g['st'] or [norm(x) for x in r['st'][:1]]
         g['links'].setdefault(r['src'], []).append(r['url'])
+    # 丁目を書かないサイトがあるので、丁目以外が同じで片方の丁目が空なら同じ部屋としてまとめる（丁目がある方に寄せる）
+    for k in [k for k, g in groups.items() if not g['chome']]:
+        same = [o for o in groups.values() if o['chome'] and rest_key(o['key']) == rest_key(k)]
+        if len(same) == 1:
+            o, g = same[0], groups.pop(k)
+            o['fee'] = max(o['fee'], g['fee'])
+            for f in ('names', 'ages', 'walks'):
+                o[f] += g[f]
+            o['st'] = o['st'] or g['st']
+            for s, us in g['links'].items():
+                o['links'].setdefault(s, []).extend(us)
     return groups
+
+
+def rest_key(k):
+    p = k.split('|')
+    return p[:2] + p[3:]
 
 
 def judge(g):
@@ -642,14 +658,17 @@ def main():
         json.dump(seen, open(SEEN, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
         log('既知として %d件を記録（通知なし）' % len(groups))
         return
-    def known(g):
-        if g['key'] in seen:
-            return True
-        # 丁目が書かれていない掲載（Yahoo に多い）は、丁目以外が同じ部屋を記録済みなら同じ部屋とみなす
-        rest = lambda k: k.split('|')[:2] + k.split('|')[3:]
-        return not g['chome'] and any(rest(k) == rest(g['key']) for k in seen)
+    # 丁目が片方だけ空の同じ部屋を記録済みなら、その記録（見つけた日・判定）を引き継ぐ
+    for k, g in groups.items():
+        if k in seen:
+            continue
+        old = next((s for s in seen if rest_key(s) == rest_key(k) and (not g['chome'] or not s.split('|')[2])), None)
+        if old:
+            seen[k] = seen[old]
+            if old in verdicts:
+                verdicts[k] = verdicts[old]
 
-    new = [g for k, g in groups.items() if not known(g)]
+    new = [g for k, g in groups.items() if k not in seen]
     hits = []
     for g in new if mode != '--list' else []:
         ok, note = verdict(g)
