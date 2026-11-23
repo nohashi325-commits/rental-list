@@ -1,7 +1,7 @@
 {
-"at": "2026-11-22T23:48",
+"at": "2026-11-23T09:34",
 "status": "ok",
-"total": 2354,
+"total": 2220,
 "rows": [
 {
 "name": "東京都品川区荏原２丁目 築41年4ヶ月 10階建",
@@ -6116,38 +6116,6 @@
 "src": "goo"
 },
 {
-"name": "下馬戸建",
-"addr": "東京都世田谷区下馬４",
-"st": [
-"祐天寺駅 徒歩15分"
-],
-"age": "築52年",
-"rent": "20万円",
-"fee": "0円",
-"layout": "3K",
-"area": "58.52㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100530941480/192704001/x1030H100530941480.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
-"name": "東京都世田谷区三宿１ 築27年2ヶ月 9階建",
-"addr": "東京都世田谷区三宿１",
-"st": [
-"三軒茶屋駅 徒歩8分"
-],
-"age": "築27年",
-"rent": "18.50万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "49.75㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100530587017/180460001/x1030H100530587017.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
 "name": "世田谷区三宿２丁目テラスハウス",
 "addr": "東京都世田谷区三宿２",
 "st": [
@@ -6304,38 +6272,6 @@
 "area": "47.6㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/1168377234/00275314/x01168377234.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
-"name": "三宿２丁目テラスハウス",
-"addr": "東京都世田谷区三宿２丁目",
-"st": [
-"池ノ上駅 徒歩10分"
-],
-"age": "築15年",
-"rent": "19.80万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "60.51㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/6990674137/00140626/x06990674137.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
-"name": "下馬４丁目戸建て",
-"addr": "東京都世田谷区下馬４丁目",
-"st": [
-"祐天寺駅 徒歩14分"
-],
-"age": "築52年",
-"rent": "20万円",
-"fee": "0円",
-"layout": "3DK",
-"area": "58.52㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/6991903788/00140626/x06991903788.html",
 "ward": "世田谷区",
 "src": "goo"
 },
