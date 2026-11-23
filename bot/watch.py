@@ -15,7 +15,9 @@ from bs4 import BeautifulSoup
 HERE = os.path.dirname(os.path.abspath(__file__))
 CLOUD = bool(os.environ.get('GITHUB_ACTIONS'))   # GitHub Actions で動いているとき（リポジトリの bot/ にある）
 SEEN = os.path.join(HERE, 'seen.json')
-GOO_ROWS = os.path.join(HERE, 'goo_rows.json')   # Mac が読んだ goo の条件内の部屋（goo はクラウドからのアクセスを断るため）
+MAC_ROWS = os.path.join(HERE, 'mac_rows.json')   # Mac が読んだ条件内の部屋（クラウドからは断られる・途中で止められるサイトの分）
+MAC_SITES = ['goo']
+ROTATE = ("HOME'S", 'at home')
 VERDICTS = os.path.join(HERE, 'verdicts.json')   # 詳細ページまで見た判定の記録 {key: [残すか, 補足]}
 LINE_CFG = os.path.join(HERE, 'line.json')        # {"token": ..., "user_id": ...}。line_setup.sh で作る
 LOG = os.path.join(HERE, 'log.txt')
@@ -241,7 +243,13 @@ SITES = {'SUUMO': (u_suumo, p_suumo, 2), "HOME'S": (u_homes, p_homes, 15), 'CHIN
 def crawl(site, rows, status):
     uf, pf, gap = SITES[site]
     empty = 0
-    for w, (s, cd) in WARDS.items():
+    wards = list(WARDS.items())
+    if site in ROTATE:
+        # HOME'S と at home は数ページ読むと止められる（どこから読んでも同じ）。1回に2区ずつ、回ごとに区を替えて読む。
+        # 物件は goo にも載っているので、毎回の取りこぼしは goo で拾う。
+        i = int(time.time() // (3 * 3600)) % 5
+        wards = wards[i * 2:i * 2 + 2]
+    for w, (s, cd) in wards:
         seen, p = set(), 1
         while p <= 60:
             d = get(uf(s, cd, p))
@@ -259,7 +267,7 @@ def crawl(site, rows, status):
             p += 1
             time.sleep(gap)
         time.sleep(gap)
-    status[site] = 'ok' if empty < 2 else '一部取得できず'
+    status[site] = 'ok' if empty < (1 if site in ROTATE else 2) else '一部取得できず'
 
 
 # ---- 条件の判定 ----
@@ -582,37 +590,42 @@ def main():
     if mode == '--site':
         print(publish_site(json.load(open(os.path.join(HERE, 'list.json'), encoding='utf-8')), exclusions()))
         return
-    if mode == '--goo':
-        # Mac 用：goo だけ読み、条件内の部屋を goo_rows.json に書く（push は goo_sync.sh が行う）
+    if mode == '--mac':
+        # Mac 用：クラウドから読めないサイトを読み、条件内の部屋を mac_rows.json に書く（push は mac_sync.sh が行う）
         rows, status = [], {}
-        crawl('goo', rows, status)
+        ts = [threading.Thread(target=crawl, args=(k, rows, status)) for k in MAC_SITES]
+        [t.start() for t in ts]
+        [t.join() for t in ts]
         keep = [r for r in rows if qualify([r])]
-        # goo の「定期借家を除く」は備考欄にだけ書かれた定期借家を見逃すので、まだ記録にない部屋は詳細ページで確かめる
+        # goo の「定期借家を除く」は備考欄にだけ書かれた定期借家を見逃すので、まだ記録にない goo の部屋は詳細ページで確かめる
         seen = json.load(open(SEEN, encoding='utf-8')) if os.path.exists(SEEN) else {}
         for r in keep:
-            if next(iter(qualify([r]))) in seen:
+            if r['src'] != 'goo' or next(iter(qualify([r]))) in seen:
                 continue
             d = get(r['url'])
             if d is not None and '定期借家' in d.get_text(' '):
                 r['teiki'] = True
             time.sleep(3)
         keep = [r for r in keep if not r['teiki']]
-        json.dump(dict(at=datetime.datetime.now().isoformat(timespec='minutes'), status=status['goo'], total=len(rows), rows=keep),
-                  open(GOO_ROWS, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
-        log('goo 取得 %d件 / 条件内 %d件 / 状態 %s' % (len(rows), len(keep), status['goo']))
+        json.dump(dict(at=datetime.datetime.now().isoformat(timespec='minutes'), status=status, total=len(rows), rows=keep),
+                  open(MAC_ROWS, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
+        log('Mac 取得 %d件 / 条件内 %d件 / 状態 %s' % (len(rows), len(keep), status))
         return
     rows, status = [], {}
-    sites = [k for k in SITES if not (CLOUD and k == 'goo')]   # goo はクラウド（GitHub）からのアクセスを断る（403）ので、クラウドでは読まない
+    md, fresh = None, False
+    if CLOUD and os.path.exists(MAC_ROWS):
+        md = json.load(open(MAC_ROWS, encoding='utf-8'))
+        fresh = (datetime.datetime.now() - datetime.datetime.fromisoformat(md['at'])).total_seconds() < 3 * 3600   # Mac がついていた回だけ使う
+        log('Mac で取得した分 %s時点 %d件 %s %s' % (md['at'], len(md['rows']), md['status'], '使う' if fresh else '古いので使わない'))
+    # goo はクラウド（GitHub）からのアクセスを断る（403）。Mac の新しい結果があるサイトはクラウドでは読まない
+    sites = [k for k in SITES if not (CLOUD and (k == 'goo' or (fresh and md['status'].get(k) == 'ok')))]
     ts = [threading.Thread(target=crawl, args=(k, rows, status)) for k in sites]
     [t.start() for t in ts]
     [t.join() for t in ts]
-    if CLOUD and os.path.exists(GOO_ROWS):
-        gd = json.load(open(GOO_ROWS, encoding='utf-8'))
-        age_h = (datetime.datetime.now() - datetime.datetime.fromisoformat(gd['at'])).total_seconds() / 3600
-        if age_h < 3:   # Mac がついていた回だけ使う。古ければ goo は無いものとして扱う（失敗扱いにはしない）
-            rows.extend(gd['rows'])
-            status['goo'] = gd['status']
-        log('goo（Mac で取得）%s時点 %d件 %s' % (gd['at'], len(gd['rows']), '使う' if age_h < 3 else '古いので使わない'))
+    if fresh:
+        rows.extend(md['rows'])
+        for k, v in md['status'].items():   # クラウドか Mac のどちらかで全部読めていれば ok
+            status[k] = 'ok' if v == 'ok' or status.get(k) == 'ok' else v
     groups = qualify(rows)
     seen = json.load(open(SEEN, encoding='utf-8')) if os.path.exists(SEEN) else {}
     verdicts = json.load(open(VERDICTS, encoding='utf-8')) if os.path.exists(VERDICTS) else {}
