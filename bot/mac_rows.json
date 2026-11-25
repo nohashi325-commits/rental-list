@@ -1,9 +1,9 @@
 {
-"at": "2026-11-25T17:48",
+"at": "2026-11-25T21:59",
 "status": {
 "goo": "ok"
 },
-"total": 2279,
+"total": 2123,
 "rows": [
 {
 "name": "シュガーシティ",
@@ -6226,22 +6226,6 @@
 "area": "71.92㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13108/030H100536342318/175002016/x1030H100536342318.html",
-"ward": "江東区",
-"src": "goo"
-},
-{
-"name": "東京都江東区豊洲１ 築45年2ヶ月 14階建",
-"addr": "東京都江東区豊洲１",
-"st": [
-"豊洲駅 徒歩10分"
-],
-"age": "築45年",
-"rent": "22.40万円",
-"fee": "16,000円",
-"layout": "3LDK",
-"area": "71.92㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13108/030H100520203620/138663003/x1030H100520203620.html",
 "ward": "江東区",
 "src": "goo"
 }
