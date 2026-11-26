@@ -18,6 +18,8 @@ SEEN = os.path.join(HERE, 'seen.json')
 MAC_ROWS = os.path.join(HERE, 'mac_rows.json')   # Mac が読んだ条件内の部屋（クラウドからは断られる・途中で止められるサイトの分）
 MAC_SITES = ['goo']
 ROTATE = ("HOME'S", 'at home')
+READ = {}   # このとき最後まで読めたサイトと区 {サイト: {区, ...}}。読めなかった区の部屋は前回の一覧から残す
+BLOCKED = re.compile(r'認証中|お詫び|表示できません|アクセス')
 VERDICTS = os.path.join(HERE, 'verdicts.json')   # 詳細ページまで見た判定の記録 {key: [残すか, 補足]}
 LINE_CFG = os.path.join(HERE, 'line.json')        # {"token": ..., "user_id": ...}。line_setup.sh で作る
 LOG = os.path.join(HERE, 'log.txt')
@@ -254,6 +256,8 @@ def crawl(site, rows, status):
         while p <= 60:
             d = get(uf(s, cd, p))
             items = [] if d is None else [x for x in pf(d) if x['url'] and x['url'] not in seen]
+            if p == 1 and d is not None and (items or not BLOCKED.search(d.title.get_text() if d.title else '')):
+                READ.setdefault(site, set()).add(w)
             if not items and p == 1 and w in PRIORITY:
                 empty += 1   # 優先4区はどのサイトにも普段は掲載があるので、0件はアクセス制限の可能性が高い
                 t = d.title.get_text(strip=True)[:40] if d is not None and d.title else '取得失敗'
@@ -460,7 +464,7 @@ def line_hits(hits, failed):
     return '\n\n'.join(parts)
 
 
-def dump_list(items, seen):
+def dump_list(items, seen, verdicts=None):
     """一覧を list.json にも書く（一覧ページを作り直すとき用）。d は最初に見つけた日。"""
     out = []
     for g, n in items:
@@ -473,7 +477,13 @@ def dump_list(items, seen):
                         m=int((g['ward'], g['town']) in {('目黒区', '五本木'), ('世田谷区', '下馬')}),
                         ym='%s年%s月' % m.groups() if m else '', gr=int(bool(m) and (int(m.group(1)), int(m.group(2))) < (1983, 4)), rf=rf, k=g['key'],
                         d=seen.get(g['key'], datetime.date.today().isoformat())))
-    json.dump(out, open(os.path.join(HERE, 'list.json'), 'w', encoding='utf-8'), ensure_ascii=False)
+    # 読めなかったサイト・区にしか載っていない部屋は、掲載が終わったのか分からないので前回の一覧から残す
+    path = os.path.join(HERE, 'list.json')
+    keys = {x['k'] for x in out}
+    for x in (json.load(open(path, encoding='utf-8')) if os.path.exists(path) else []):
+        if x['k'] not in keys and (verdicts or {}).get(x['k'], [True])[0] and any(x['w'] not in READ.get(s, ()) for s in x['ln']):
+            out.append(x)
+    json.dump(out, open(path, 'w', encoding='utf-8'), ensure_ascii=False)
     return out
 
 
@@ -640,6 +650,9 @@ def main():
     [t.join() for t in ts]
     if fresh:
         rows.extend(md['rows'])
+        for k, v in md['status'].items():
+            if v == 'ok':
+                READ[k] = set(WARDS)
         for k, v in md['status'].items():   # クラウドか Mac のどちらかで全部読めていれば ok
             status[k] = 'ok' if v == 'ok' or status.get(k) == 'ok' else v
     groups = qualify(rows)
@@ -698,8 +711,9 @@ def main():
     items = [(g, v[1]) for g in groups.values() for v in [verdict(g)] if v[0]]
     shown = [x for x in items if x[0]['key'] not in excl]
     json.dump(verdicts, open(VERDICTS, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
-    if publish_site(dump_list(items, seen), excl if excl_known else None):
-        log('一覧ページを公開 %d件' % len(items))
+    listed = dump_list(items, seen, verdicts)
+    if publish_site(listed, excl if excl_known else None):
+        log('一覧ページを公開 %d件（うち読めなかったサイト・区の分として前回から残した %d件）' % (len(listed), len(listed) - len(items)))
     if write_note(shown, seen):
         log('メモの一覧を更新 %d件（外した部屋 %d件を除く）' % (len(shown), len(items) - len(shown)))
 
