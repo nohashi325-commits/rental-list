@@ -1,10 +1,26 @@
 {
-"at": "2026-11-27T10:28",
+"at": "2026-11-27T11:55",
 "status": {
 "goo": "ok"
 },
-"total": 2226,
+"total": 2283,
 "rows": [
+{
+"name": "シュガーシティ",
+"addr": "東京都品川区戸越６丁目",
+"st": [
+"中延駅 徒歩4分"
+],
+"age": "築36年",
+"rent": "15.50万円",
+"fee": "2,000円",
+"layout": "2SLDK",
+"area": "60.1㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1457200091418/145720/x41457200091418.html",
+"ward": "品川区",
+"src": "goo"
+},
 {
 "name": "東京都品川区荏原２丁目 築41年4ヶ月 10階建",
 "addr": "東京都品川区荏原２丁目",
@@ -18,6 +34,22 @@
 "area": "53.46㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1552220009239/155222/x41552220009239.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
+"name": "ライオンズマンション北品川",
+"addr": "東京都品川区北品川１丁目",
+"st": [
+"北品川駅 徒歩7分"
+],
+"age": "築48年",
+"rent": "15.50万円",
+"fee": "15,000円",
+"layout": "2LDK",
+"area": "45.41㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1587520000802/158752/x41587520000802.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -38,6 +70,38 @@
 "src": "goo"
 },
 {
+"name": "ｍａｇｎｏｌｉａ ｈｏｕｓｅ",
+"addr": "東京都品川区南品川４丁目",
+"st": [
+"大井町駅 徒歩10分"
+],
+"age": "築39年",
+"rent": "17.50万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "65.5㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1457200090604/145720/x41457200090604.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
+"name": "ｍａｇｎｏｌｉａ ｈｏｕｓｅ",
+"addr": "東京都品川区南品川４丁目",
+"st": [
+"大井町駅 徒歩10分"
+],
+"age": "築39年",
+"rent": "14.50万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "50.2㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13109/1457200089971/145720/x41457200089971.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
 "name": "井上アパート",
 "addr": "東京都品川区戸越３丁目",
 "st": [
@@ -54,6 +118,22 @@
 "src": "goo"
 },
 {
+"name": "東京都品川区戸越１ 築54年 2階建",
+"addr": "東京都品川区戸越１",
+"st": [
+"戸越駅 徒歩4分"
+],
+"age": "築54年",
+"rent": "23万円",
+"fee": "0円",
+"layout": "3K",
+"area": "47.78㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538863101/175002012/x1030H100538863101.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
 "name": "シャルム武蔵小山",
 "addr": "東京都品川区荏原２",
 "st": [
@@ -65,7 +145,7 @@
 "layout": "2LDK",
 "area": "53.46㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538804585/152915007/x1030H100538804585.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538924665/133000001/x1030H100538924665.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -82,22 +162,6 @@
 "area": "78.04㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538708499/191583001/x1030H100538708499.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "シュガーシティ",
-"addr": "東京都品川区戸越６",
-"st": [
-"中延駅 徒歩4分"
-],
-"age": "築36年",
-"rent": "15.50万円",
-"fee": "2,000円",
-"layout": "2SLDK",
-"area": "60.1㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538632979/076493000/x1030H100538632979.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -130,38 +194,6 @@
 "area": "47.78㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536885090/139497001/x1030H100536885090.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "セレーソ洗足",
-"addr": "東京都品川区小山７",
-"st": [
-"西小山駅 徒歩6分"
-],
-"age": "築22年",
-"rent": "22.50万円",
-"fee": "3,000円",
-"layout": "2LDK",
-"area": "57.96㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538617363/175002014/x1030H100538617363.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "セレーソ洗足",
-"addr": "東京都品川区小山７",
-"st": [
-"西小山駅 徒歩6分"
-],
-"age": "築22年",
-"rent": "22.50万円",
-"fee": "3,000円",
-"layout": "2LDK",
-"area": "57.96㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538136064/123005001/x1030H100538136064.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -209,7 +241,7 @@
 "layout": "2LDK",
 "area": "56.58㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538490380/066835009/x1030H100538490380.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538468601/130765004/x1030H100538468601.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -225,7 +257,39 @@
 "layout": "2LDK",
 "area": "56.58㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538468601/130765004/x1030H100538468601.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538490380/066835009/x1030H100538490380.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
+"name": "セレーソ洗足",
+"addr": "東京都品川区小山７",
+"st": [
+"西小山駅 徒歩6分"
+],
+"age": "築22年",
+"rent": "22.50万円",
+"fee": "3,000円",
+"layout": "2LDK",
+"area": "57.96㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538503110/175002073/x1030H100538503110.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
+"name": "セレーソ洗足",
+"addr": "東京都品川区小山７",
+"st": [
+"西小山駅 徒歩6分"
+],
+"age": "築22年",
+"rent": "22.50万円",
+"fee": "3,000円",
+"layout": "2LDK",
+"area": "57.96㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538136064/123005001/x1030H100538136064.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -306,22 +370,6 @@
 "area": "78.04㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100538203658/131045002/x1030H100538203658.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "グランピア",
-"addr": "東京都品川区南品川１",
-"st": [
-"新馬場駅 徒歩3分"
-],
-"age": "築11年",
-"rent": "23万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "78.04㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537824538/176807001/x1030H100537824538.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -422,22 +470,6 @@
 "src": "goo"
 },
 {
-"name": "シャルム武蔵小山",
-"addr": "東京都品川区荏原２",
-"st": [
-"戸越銀座駅 徒歩5分"
-],
-"age": "築41年",
-"rent": "23万円",
-"fee": "6,000円",
-"layout": "2LDK",
-"area": "53.46㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537848351/130977001/x1030H100537848351.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
 "name": "シャルム武蔵小杉",
 "addr": "東京都品川区荏原２",
 "st": [
@@ -450,6 +482,22 @@
 "area": "53.46㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537887330/194650001/x1030H100537887330.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
+"name": "シャルム武蔵小山",
+"addr": "東京都品川区荏原２",
+"st": [
+"戸越銀座駅 徒歩5分"
+],
+"age": "築41年",
+"rent": "23万円",
+"fee": "6,000円",
+"layout": "2LDK",
+"area": "53.46㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100537848351/130977001/x1030H100537848351.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -534,22 +582,6 @@
 "src": "goo"
 },
 {
-"name": "ライオンズマンション北品川",
-"addr": "東京都品川区北品川１",
-"st": [
-"新馬場駅 徒歩6分"
-],
-"age": "築48年",
-"rent": "15.50万円",
-"fee": "15,000円",
-"layout": "2LDK",
-"area": "45.41㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536739044/157097001/x1030H100536739044.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
 "name": "洗足７１８",
 "addr": "東京都品川区荏原７",
 "st": [
@@ -598,38 +630,6 @@
 "src": "goo"
 },
 {
-"name": "ＬＥＧＡＬＡＮＤ東品川",
-"addr": "東京都品川区東品川１",
-"st": [
-"北品川駅 徒歩10分"
-],
-"age": "築11年",
-"rent": "18.90万円",
-"fee": "10,000円",
-"layout": "3DK",
-"area": "57.6㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536443129/158045005/x1030H100536443129.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "東京都品川区戸越１ 築54年 2階建",
-"addr": "東京都品川区戸越１",
-"st": [
-"戸越駅 徒歩5分"
-],
-"age": "築54年",
-"rent": "23万円",
-"fee": "0円",
-"layout": "3K",
-"area": "47.78㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536341146/175002016/x1030H100536341146.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
 "name": "東京都品川区荏原７ 築25年8ヶ月 2階建",
 "addr": "東京都品川区荏原７",
 "st": [
@@ -642,22 +642,6 @@
 "area": "58.3㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536254834/176160001/x1030H100536254834.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "東京都品川区荏原７ 築25年11ヶ月 2階建",
-"addr": "東京都品川区荏原７",
-"st": [
-"洗足駅 徒歩6分"
-],
-"age": "築25年",
-"rent": "16万円",
-"fee": "3,000円",
-"layout": "2LDK",
-"area": "58.3㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100536335952/181928001/x1030H100536335952.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -786,38 +770,6 @@
 "area": "69.49㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100535439516/085226004/x1030H100535439516.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "ｍａｇｎｏｌｉａ ｈｏｕｓｅ",
-"addr": "東京都品川区南品川４",
-"st": [
-"大井町駅 徒歩10分"
-],
-"age": "築39年",
-"rent": "17.50万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "65.5㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100535296161/144590005/x1030H100535296161.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
-"name": "ｍａｇｎｏｌｉａ ｈｏｕｓｅ",
-"addr": "東京都品川区南品川４",
-"st": [
-"大井町駅 徒歩10分"
-],
-"age": "築39年",
-"rent": "14.50万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "50.2㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13109/030H100533680606/144590005/x1030H100533680606.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -1142,6 +1094,22 @@
 "src": "goo"
 },
 {
+"name": "戸越Ｂ．Ｉ．Ｇ． ＲＥＳＩＤＥＮＣＥ（トゴシビッグレジデンス）",
+"addr": "東京都品川区戸越１丁目",
+"st": [
+"戸越駅 徒歩7分"
+],
+"age": "新築",
+"rent": "23万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "51.44㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1161324333/00263710/x01161324333.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
 "name": "Ｄｅａｒ Ｃｏｕｒｔ 南品川",
 "addr": "東京都品川区南品川４丁目",
 "st": [
@@ -1190,22 +1158,6 @@
 "src": "goo"
 },
 {
-"name": "戸越Ｂ．Ｉ．Ｇ． ＲＥＳＩＤＥＮＣＥ（トゴシビッグレジデンス）",
-"addr": "東京都品川区戸越１丁目",
-"st": [
-"戸越駅 徒歩7分"
-],
-"age": "新築",
-"rent": "23万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "51.44㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1161324333/00263710/x01161324333.html",
-"ward": "品川区",
-"src": "goo"
-},
-{
 "name": "東京都品川区西品川２丁目 築9年4ヶ月 3階建",
 "addr": "東京都品川区西品川２丁目",
 "st": [
@@ -1234,6 +1186,22 @@
 "area": "48.9㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1122690537/00273636/x01122690537.html",
+"ward": "品川区",
+"src": "goo"
+},
+{
+"name": "ＬＥＧＡＬＡＮＤ東品川",
+"addr": "東京都品川区東品川１丁目",
+"st": [
+"北品川駅 徒歩10分"
+],
+"age": "築11年",
+"rent": "18.90万円",
+"fee": "10,000円",
+"layout": "3DK",
+"area": "57.6㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13109/1101861436/00282258/x01101861436.html",
 "ward": "品川区",
 "src": "goo"
 },
@@ -1286,22 +1254,6 @@
 "src": "goo"
 },
 {
-"name": "東京都目黒区下目黒２丁目 築3年4ヶ月 地上5階地下1階建",
-"addr": "東京都目黒区下目黒２丁目",
-"st": [
-"目黒駅 徒歩9分"
-],
-"age": "築3年",
-"rent": "19.20万円",
-"fee": "8,000円",
-"layout": "2LDK",
-"area": "52.58㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1537890055726/153789/x41537890055726.html",
-"ward": "目黒区",
-"src": "goo"
-},
-{
 "name": "クリオ目黒ラ・モード",
 "addr": "東京都目黒区中町１丁目",
 "st": [
@@ -1314,6 +1266,22 @@
 "area": "51.42㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/4/13110/1587520000943/158752/x41587520000943.html",
+"ward": "目黒区",
+"src": "goo"
+},
+{
+"name": "大橋１丁目貸家",
+"addr": "東京都目黒区大橋１",
+"st": [
+"池尻大橋駅 徒歩6分"
+],
+"age": "築21年",
+"rent": "20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "62.43㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100538855084/179833002/x1030H100538855084.html",
 "ward": "目黒区",
 "src": "goo"
 },
@@ -1346,38 +1314,6 @@
 "area": "51.42㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100538803641/076493000/x1030H100538803641.html",
-"ward": "目黒区",
-"src": "goo"
-},
-{
-"name": "ライオンズマンション中目黒",
-"addr": "東京都目黒区青葉台１",
-"st": [
-"中目黒駅 徒歩5分"
-],
-"age": "築48年",
-"rent": "19万円",
-"fee": "10,000円",
-"layout": "2LDK",
-"area": "47.5㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100531774406/123005004/x1030H100531774406.html",
-"ward": "目黒区",
-"src": "goo"
-},
-{
-"name": "大橋１丁目貸家",
-"addr": "東京都目黒区大橋１",
-"st": [
-"池尻大橋駅 徒歩6分"
-],
-"age": "築21年",
-"rent": "20万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "62.43㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100538713971/103842009/x1030H100538713971.html",
 "ward": "目黒区",
 "src": "goo"
 },
@@ -1606,22 +1542,6 @@
 "src": "goo"
 },
 {
-"name": "日興パレス駒場＿",
-"addr": "東京都目黒区駒場１",
-"st": [
-"神泉駅 徒歩6分"
-],
-"age": "築44年",
-"rent": "18.50万円",
-"fee": "5,000円",
-"layout": "3LDK",
-"area": "55.93㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537530658/152844001/x1030H100537530658.html",
-"ward": "目黒区",
-"src": "goo"
-},
-{
 "name": "日興パレス駒場",
 "addr": "東京都目黒区駒場１",
 "st": [
@@ -1634,22 +1554,6 @@
 "area": "55.93㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537625994/175556001/x1030H100537625994.html",
-"ward": "目黒区",
-"src": "goo"
-},
-{
-"name": "ＨＪ ＰＬＡＣＥ 目黒通り",
-"addr": "東京都目黒区下目黒２",
-"st": [
-"目黒駅 徒歩9分"
-],
-"age": "築3年",
-"rent": "19.20万円",
-"fee": "8,000円",
-"layout": "2LDK",
-"area": "52.58㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100537422024/152509025/x1030H100537422024.html",
 "ward": "目黒区",
 "src": "goo"
 },
@@ -1910,6 +1814,22 @@
 "src": "goo"
 },
 {
+"name": "ライオンズマンション中目黒",
+"addr": "東京都目黒区青葉台１",
+"st": [
+"中目黒駅 徒歩5分"
+],
+"age": "築48年",
+"rent": "19万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "47.5㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13110/030H100531774406/123005004/x1030H100531774406.html",
+"ward": "目黒区",
+"src": "goo"
+},
+{
 "name": "東京都目黒区目黒１ 築35年7ヶ月 4階建",
 "addr": "東京都目黒区目黒１",
 "st": [
@@ -2086,6 +2006,22 @@
 "src": "goo"
 },
 {
+"name": "中目黒４丁目戸建て",
+"addr": "東京都目黒区中目黒４丁目",
+"st": [
+"中目黒駅 徒歩16分"
+],
+"age": "築59年",
+"rent": "19.80万円",
+"fee": "0円",
+"layout": "3LDK",
+"area": "51.7㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13110/6992012626/00140626/x06992012626.html",
+"ward": "目黒区",
+"src": "goo"
+},
+{
 "name": "ハウス大橋",
 "addr": "東京都目黒区大橋１丁目",
 "st": [
@@ -2182,23 +2118,7 @@
 "src": "goo"
 },
 {
-"name": "中目黒４丁目戸建て",
-"addr": "東京都目黒区中目黒４丁目",
-"st": [
-"中目黒駅 徒歩16分"
-],
-"age": "築59年",
-"rent": "19.80万円",
-"fee": "0円",
-"layout": "3LDK",
-"area": "51.7㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13110/6992012626/00140626/x06992012626.html",
-"ward": "目黒区",
-"src": "goo"
-},
-{
-"name": "セレッソ幡ヶ谷",
+"name": "東京都渋谷区幡ヶ谷２丁目 築30年1ヶ月 5階建",
 "addr": "東京都渋谷区幡ヶ谷２丁目",
 "st": [
 "幡ヶ谷駅 徒歩6分"
@@ -2209,23 +2129,7 @@
 "layout": "2LDK",
 "area": "60.5㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1400740010765/140074/x41400740010765.html",
-"ward": "渋谷区",
-"src": "goo"
-},
-{
-"name": "セレッソ幡ヶ谷",
-"addr": "東京都渋谷区幡ヶ谷２丁目",
-"st": [
-"幡ヶ谷駅 徒歩6分"
-],
-"age": "築30年",
-"rent": "20万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "60.5㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/6992176059/00275228/x06992176059.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1471810052315/147181/x41471810052315.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2241,7 +2145,7 @@
 "layout": "3DK",
 "area": "49.25㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587520009225/158752/x41587520009225.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1400740011458/140074/x41400740011458.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2273,7 +2177,7 @@
 "layout": "2LDK",
 "area": "64.59㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587550008981/158755/x41587550008981.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587520008983/158752/x41587520008983.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2289,7 +2193,7 @@
 "layout": "2LDK",
 "area": "66.66㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587560004345/158756/x41587560004345.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587550004348/158755/x41587550004348.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2306,6 +2210,22 @@
 "area": "64.59㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1577680017888/157768/x41577680017888.html",
+"ward": "渋谷区",
+"src": "goo"
+},
+{
+"name": "セレ渋谷本町",
+"addr": "東京都渋谷区本町４",
+"st": [
+"初台駅 徒歩11分"
+],
+"age": "築21年",
+"rent": "21.50万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "66.66㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538865890/176296001/x1030H100538865890.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2337,23 +2257,39 @@
 "layout": "2LDK",
 "area": "66.66㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538009029/178413001/x1030H100538009029.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/1190583602/00278753/x01190583602.html",
 "ward": "渋谷区",
 "src": "goo"
 },
 {
-"name": "セレ渋谷本町",
-"addr": "東京都渋谷区本町４",
+"name": "セレッソ幡ヶ谷",
+"addr": "東京都渋谷区幡ヶ谷２丁目",
 "st": [
-"初台駅 徒歩11分"
+"幡ヶ谷駅 徒歩6分"
 ],
-"age": "築21年",
-"rent": "21.50万円",
+"age": "築30年",
+"rent": "22.50万円",
 "fee": "5,000円",
 "layout": "2LDK",
-"area": "66.66㎡",
+"area": "60.5㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/1190583602/00278753/x01190583602.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13113/1587560008494/158756/x41587560008494.html",
+"ward": "渋谷区",
+"src": "goo"
+},
+{
+"name": "セレッソ幡ヶ谷",
+"addr": "東京都渋谷区幡ヶ谷２丁目",
+"st": [
+"幡ヶ谷駅 徒歩6分"
+],
+"age": "築30年",
+"rent": "20万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "60.5㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13113/6992176059/00275228/x06992176059.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2417,7 +2353,55 @@
 "layout": "3DK",
 "area": "49.25㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538804615/152915007/x1030H100538804615.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538943784/152915007/x1030H100538943784.html",
+"ward": "渋谷区",
+"src": "goo"
+},
+{
+"name": "メイプルベル渋谷本町",
+"addr": "東京都渋谷区本町５",
+"st": [
+"西新宿五丁目駅 徒歩10分"
+],
+"age": "築12年",
+"rent": "19.50万円",
+"fee": "6,500円",
+"layout": "2LDK",
+"area": "53.25㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538889204/176807001/x1030H100538889204.html",
+"ward": "渋谷区",
+"src": "goo"
+},
+{
+"name": "セレ渋谷本町",
+"addr": "東京都渋谷区本町４",
+"st": [
+"初台駅 徒歩11分"
+],
+"age": "築21年",
+"rent": "21万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "64.59㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538951314/001027033/x1030H100538951314.html",
+"ward": "渋谷区",
+"src": "goo"
+},
+{
+"name": "セレ渋谷本町",
+"addr": "東京都渋谷区本町４",
+"st": [
+"初台駅 徒歩11分"
+],
+"age": "築21年",
+"rent": "21.50万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "66.66㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100519572210/001027033/x1030H100519572210.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2562,22 +2546,6 @@
 "area": "49.25㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100538221129/066835004/x1030H100538221129.html",
-"ward": "渋谷区",
-"src": "goo"
-},
-{
-"name": "メイプルベル渋谷本町",
-"addr": "東京都渋谷区本町５",
-"st": [
-"西新宿五丁目駅 徒歩10分"
-],
-"age": "築12年",
-"rent": "19.50万円",
-"fee": "6,500円",
-"layout": "2LDK",
-"area": "53.25㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100537824490/176807001/x1030H100537824490.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2822,22 +2790,6 @@
 "src": "goo"
 },
 {
-"name": "東京都渋谷区初台１ 築44年10ヶ月 4階建",
-"addr": "東京都渋谷区初台１",
-"st": [
-"初台駅 徒歩1分"
-],
-"age": "築44年",
-"rent": "18万円",
-"fee": "8,000円",
-"layout": "3DK",
-"area": "56.37㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100533272014/088947009/x1030H100533272014.html",
-"ward": "渋谷区",
-"src": "goo"
-},
-{
 "name": "シャトー初台",
 "addr": "東京都渋谷区初台１",
 "st": [
@@ -2850,6 +2802,22 @@
 "area": "56.37㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100533335761/082287002/x1030H100533335761.html",
+"ward": "渋谷区",
+"src": "goo"
+},
+{
+"name": "東京都渋谷区初台１ 築44年10ヶ月 4階建",
+"addr": "東京都渋谷区初台１",
+"st": [
+"初台駅 徒歩1分"
+],
+"age": "築44年",
+"rent": "18万円",
+"fee": "8,000円",
+"layout": "3DK",
+"area": "56.37㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100533272014/088947009/x1030H100533272014.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -2930,22 +2898,6 @@
 "area": "51.05㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100525196672/191911001/x1030H100525196672.html",
-"ward": "渋谷区",
-"src": "goo"
-},
-{
-"name": "セレ渋谷本町",
-"addr": "東京都渋谷区本町４",
-"st": [
-"初台駅 徒歩11分"
-],
-"age": "築21年",
-"rent": "21.50万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "66.66㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13113/030H100519572210/001027033/x1030H100519572210.html",
 "ward": "渋谷区",
 "src": "goo"
 },
@@ -3046,6 +2998,22 @@
 "src": "goo"
 },
 {
+"name": "東京都港区三田２丁目 築30年9ヶ月 11階建",
+"addr": "東京都港区三田２丁目",
+"st": [
+"三田駅 徒歩7分"
+],
+"age": "築30年",
+"rent": "23万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "57.6㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1457200091159/145720/x41457200091159.html",
+"ward": "港区",
+"src": "goo"
+},
+{
 "name": "ビレッジハウス芝浦タワー１号棟",
 "addr": "東京都港区海岸３丁目",
 "st": [
@@ -3074,22 +3042,6 @@
 "area": "48.26㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1588580000426/158858/x41588580000426.html",
-"ward": "港区",
-"src": "goo"
-},
-{
-"name": "東京都港区三田２丁目 築30年1ヶ月 11階建",
-"addr": "東京都港区三田２丁目",
-"st": [
-"三田駅 徒歩9分"
-],
-"age": "築30年",
-"rent": "23万円",
-"fee": "10,000円",
-"layout": "2LDK",
-"area": "57.6㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13103/1588580000146/158858/x41588580000146.html",
 "ward": "港区",
 "src": "goo"
 },
@@ -3174,22 +3126,6 @@
 "src": "goo"
 },
 {
-"name": "グランドパレス田町",
-"addr": "東京都港区芝浦４",
-"st": [
-"田町駅 徒歩9分"
-],
-"age": "築45年",
-"rent": "19.80万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "54.45㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100519692016/013419000/x1030H100519692016.html",
-"ward": "港区",
-"src": "goo"
-},
-{
 "name": "高輪ホワイトマンション",
 "addr": "東京都港区高輪２",
 "st": [
@@ -3254,6 +3190,22 @@
 "src": "goo"
 },
 {
+"name": "東京都港区高輪２ 築54年9ヶ月 13階建",
+"addr": "東京都港区高輪２",
+"st": [
+"泉岳寺駅 徒歩1分"
+],
+"age": "築54年",
+"rent": "15万円",
+"fee": "15,000円",
+"layout": "3K",
+"area": "46.1㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537662520/193199002/x1030H100537662520.html",
+"ward": "港区",
+"src": "goo"
+},
+{
 "name": "東京都港区三田２ 築30年9ヶ月 11階建",
 "addr": "東京都港区三田２",
 "st": [
@@ -3266,22 +3218,6 @@
 "area": "57.6㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537558481/148996001/x1030H100537558481.html",
-"ward": "港区",
-"src": "goo"
-},
-{
-"name": "東京都港区高輪２ 築54年9ヶ月 13階建",
-"addr": "東京都港区高輪２",
-"st": [
-"泉岳寺駅 徒歩1分"
-],
-"age": "築54年",
-"rent": "15万円",
-"fee": "15,000円",
-"layout": "3DK",
-"area": "46.1㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537177237/164644001/x1030H100537177237.html",
 "ward": "港区",
 "src": "goo"
 },
@@ -3314,22 +3250,6 @@
 "area": "57.6㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537135254/155269002/x1030H100537135254.html",
-"ward": "港区",
-"src": "goo"
-},
-{
-"name": "藤和シティスクエア三田",
-"addr": "東京都港区三田２",
-"st": [
-"三田駅 徒歩9分"
-],
-"age": "築30年",
-"rent": "23万円",
-"fee": "10,000円",
-"layout": "2LDK",
-"area": "57.6㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100537148623/167425002/x1030H100537148623.html",
 "ward": "港区",
 "src": "goo"
 },
@@ -3494,6 +3414,22 @@
 "src": "goo"
 },
 {
+"name": "グランドパレス田町",
+"addr": "東京都港区芝浦４",
+"st": [
+"田町駅 徒歩9分"
+],
+"age": "築45年",
+"rent": "21.50万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "54.45㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13103/030H100519953842/188857001/x1030H100519953842.html",
+"ward": "港区",
+"src": "goo"
+},
+{
 "name": "ＣＯＮＴＥＬ ＭＩＮＡＭＩＡＺＡＢＵ",
 "addr": "東京都港区南麻布１",
 "st": [
@@ -3538,6 +3474,22 @@
 "area": "63㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/0/13103/1102164436/00265554/x01102164436.html",
+"ward": "港区",
+"src": "goo"
+},
+{
+"name": "グランドメゾン田町",
+"addr": "東京都港区芝浦２丁目",
+"st": [
+"田町駅 徒歩10分"
+],
+"age": "築37年",
+"rent": "23万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "51.45㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13103/6992833285/00275783/x06992833285.html",
 "ward": "港区",
 "src": "goo"
 },
@@ -3590,35 +3542,19 @@
 "src": "goo"
 },
 {
-"name": "東京都港区三田２丁目 築30年1ヶ月 11階建",
-"addr": "東京都港区三田２丁目",
+"name": "東京都新宿区富久町 築44年9ヶ月 地上14階地下1階建",
+"addr": "東京都新宿区富久町",
 "st": [
-"三田駅 徒歩9分"
+"新宿御苑前駅 徒歩8分"
 ],
-"age": "築30年",
-"rent": "23万円",
+"age": "築44年",
+"rent": "22.50万円",
 "fee": "10,000円",
 "layout": "2LDK",
-"area": "57.6㎡",
+"area": "51.3㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13103/1174228532/00265893/x01174228532.html",
-"ward": "港区",
-"src": "goo"
-},
-{
-"name": "グランドメゾン田町",
-"addr": "東京都港区芝浦２丁目",
-"st": [
-"田町駅 徒歩10分"
-],
-"age": "築37年",
-"rent": "23万円",
-"fee": "10,000円",
-"layout": "2LDK",
-"area": "51.45㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13103/6992833285/00275783/x06992833285.html",
-"ward": "港区",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13104/1256380082211/125638/x41256380082211.html",
+"ward": "新宿区",
 "src": "goo"
 },
 {
@@ -3673,7 +3609,7 @@
 "name": "ハイホーム本陣",
 "addr": "東京都新宿区富久町",
 "st": [
-"新宿御苑前駅 徒歩8分"
+"新宿御苑前駅 徒歩7分"
 ],
 "age": "築44年",
 "rent": "21.50万円",
@@ -3689,7 +3625,23 @@
 "name": "ハイホーム本陣",
 "addr": "東京都新宿区富久町",
 "st": [
-"新宿御苑前駅 徒歩8分"
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "22万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "51.3㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538967239/150806001/x1030H100538967239.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "ハイホーム本陣",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
 ],
 "age": "築44年",
 "rent": "22万円",
@@ -3697,7 +3649,7 @@
 "layout": "2LDK",
 "area": "56.4㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535589982/152509030/x1030H100535589982.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538949495/167919004/x1030H100538949495.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -3750,22 +3702,6 @@
 "src": "goo"
 },
 {
-"name": "東京都新宿区愛住町 築11年4ヶ月 4階建",
-"addr": "東京都新宿区愛住町",
-"st": [
-"四谷三丁目駅 徒歩4分"
-],
-"age": "築11年",
-"rent": "21.80万円",
-"fee": "9,000円",
-"layout": "2LDK",
-"area": "50.72㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13104/1565010036244/156501/x41565010036244.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
 "name": "東京都新宿区市谷薬王寺町 築20年1ヶ月 地上5階地下1階建",
 "addr": "東京都新宿区市谷薬王寺町",
 "st": [
@@ -3777,7 +3713,7 @@
 "layout": "2LDK",
 "area": "50.93㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13104/1565030027995/156503/x41565030027995.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13104/1565010035620/156501/x41565010035620.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -3798,18 +3734,34 @@
 "src": "goo"
 },
 {
-"name": "朝日新大久保マンション",
-"addr": "東京都新宿区百人町１",
+"name": "新宿スカイプラザ",
+"addr": "東京都新宿区大久保２",
 "st": [
-"新大久保駅 徒歩3分"
+"新大久保駅 徒歩6分"
 ],
-"age": "築49年",
-"rent": "22.80万円",
+"age": "築55年",
+"rent": "22万円",
 "fee": "0円",
-"layout": "2LDK",
-"area": "73.71㎡",
+"layout": "3LDK",
+"area": "63㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538804950/103842007/x1030H100538804950.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538939788/152915007/x1030H100538939788.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "ハイホーム本陣",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩7分"
+],
+"age": "築44年",
+"rent": "22万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "56.4㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538869721/149891011/x1030H100538869721.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -3830,50 +3782,50 @@
 "src": "goo"
 },
 {
-"name": "ハイホーム本陣",
-"addr": "東京都新宿区富久町",
+"name": "ハイネスロフティ",
+"addr": "東京都新宿区西新宿４",
 "st": [
-"新宿御苑前駅 徒歩7分"
+"都庁前駅 徒歩8分"
 ],
-"age": "築44年",
-"rent": "22万円",
+"age": "築47年",
+"rent": "23万円",
 "fee": "10,000円",
-"layout": "2LDK",
-"area": "56.4㎡",
+"layout": "3LDK",
+"area": "62.7㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100534226025/100883037/x1030H100534226025.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538940286/152915007/x1030H100538940286.html",
 "ward": "新宿区",
 "src": "goo"
 },
 {
-"name": "東京都新宿区大久保２ 築25年9ヶ月 11階建",
-"addr": "東京都新宿区大久保２",
+"name": "東京都新宿区西新宿２ 築31年1ヶ月 地上9階地下6階建",
+"addr": "東京都新宿区西新宿２",
 "st": [
-"西早稲田駅 徒歩4分"
+"落合南長崎駅 徒歩9分"
 ],
-"age": "築25年",
-"rent": "19万円",
+"age": "築31年",
+"rent": "20万円",
 "fee": "10,000円",
-"layout": "2LDK",
-"area": "53.51㎡",
+"layout": "3LDK",
+"area": "68.38㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538701546/163067001/x1030H100538701546.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538920891/175002007/x1030H100538920891.html",
 "ward": "新宿区",
 "src": "goo"
 },
 {
-"name": "ヴィルラフィーネ東新宿",
-"addr": "東京都新宿区大久保２",
+"name": "朝日新大久保マンション",
+"addr": "東京都新宿区百人町１",
 "st": [
-"西早稲田駅 徒歩4分"
+"新大久保駅 徒歩3分"
 ],
-"age": "築25年",
-"rent": "19万円",
-"fee": "10,000円",
+"age": "築49年",
+"rent": "22.80万円",
+"fee": "0円",
 "layout": "2LDK",
-"area": "53.51㎡",
+"area": "73.71㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538668072/103842003/x1030H100538668072.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538804058/149891011/x1030H100538804058.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -3894,34 +3846,34 @@
 "src": "goo"
 },
 {
-"name": "新宿スカイプラザ",
+"name": "ヴィルラフィーネ東新宿",
 "addr": "東京都新宿区大久保２",
 "st": [
-"新大久保駅 徒歩6分"
+"西早稲田駅 徒歩4分"
 ],
-"age": "築55年",
-"rent": "22万円",
-"fee": "0円",
-"layout": "3LDK",
-"area": "63㎡",
+"age": "築25年",
+"rent": "19万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "53.51㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538667599/152915007/x1030H100538667599.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538668072/103842003/x1030H100538668072.html",
 "ward": "新宿区",
 "src": "goo"
 },
 {
-"name": "ハイネスロフティ",
-"addr": "東京都新宿区西新宿４",
+"name": "東京都新宿区大久保２ 築25年9ヶ月 11階建",
+"addr": "東京都新宿区大久保２",
 "st": [
-"都庁前駅 徒歩8分"
+"西早稲田駅 徒歩4分"
 ],
-"age": "築47年",
-"rent": "23万円",
+"age": "築25年",
+"rent": "19万円",
 "fee": "10,000円",
-"layout": "3LDK",
-"area": "62.7㎡",
+"layout": "2LDK",
+"area": "53.51㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538665317/152915007/x1030H100538665317.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100538701546/163067001/x1030H100538701546.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -4086,38 +4038,6 @@
 "src": "goo"
 },
 {
-"name": "信川ハイツ",
-"addr": "東京都新宿区市谷台町",
-"st": [
-"曙橋駅 徒歩6分"
-],
-"age": "築53年",
-"rent": "19.20万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "56.2㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100535590251/152509030/x1030H100535590251.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
-"name": "信川ハイツ",
-"addr": "東京都新宿区市谷台町",
-"st": [
-"曙橋駅 徒歩6分"
-],
-"age": "築53年",
-"rent": "19.20万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "56.1㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532752755/193221001/x1030H100532752755.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
 "name": "アクサス西新宿",
 "addr": "東京都新宿区西新宿４",
 "st": [
@@ -4230,6 +4150,38 @@
 "src": "goo"
 },
 {
+"name": "信川ハイツ",
+"addr": "東京都新宿区市谷台町",
+"st": [
+"曙橋駅 徒歩8分"
+],
+"age": "築53年",
+"rent": "19.20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "56.1㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532752755/193221001/x1030H100532752755.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "信川ハイツ",
+"addr": "東京都新宿区市谷台町",
+"st": [
+"曙橋駅 徒歩8分"
+],
+"age": "築53年",
+"rent": "19.20万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "56.2㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100532697919/191911001/x1030H100532697919.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
 "name": "四谷グリーンマンション",
 "addr": "東京都新宿区須賀町",
 "st": [
@@ -4278,22 +4230,6 @@
 "src": "goo"
 },
 {
-"name": "飯田橋第一パークファミリア",
-"addr": "東京都新宿区新小川町",
-"st": [
-"飯田橋駅 徒歩10分"
-],
-"age": "築47年",
-"rent": "23万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "54.6㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100531985162/071816101/x1030H100531985162.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
 "name": "東京都新宿区市谷台町 築53年11ヶ月 地上6階地下1階建",
 "addr": "東京都新宿区市谷台町",
 "st": [
@@ -4322,22 +4258,6 @@
 "area": "56.2㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100531837394/152313001/x1030H100531837394.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
-"name": "東京都新宿区愛住町 築11年4ヶ月 4階建",
-"addr": "東京都新宿区愛住町",
-"st": [
-"四谷三丁目駅 徒歩4分"
-],
-"age": "築11年",
-"rent": "21.80万円",
-"fee": "9,000円",
-"layout": "2LDK",
-"area": "50.72㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100531658556/185672001/x1030H100531658556.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -4434,6 +4354,22 @@
 "area": "70.65㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100528941825/003779002/x1030H100528941825.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
+"name": "飯田橋第一パークファミリア",
+"addr": "東京都新宿区新小川町",
+"st": [
+"江戸川橋駅 徒歩10分"
+],
+"age": "築47年",
+"rent": "23万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "54.6㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100526942420/000389B13/x1030H100526942420.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -4630,22 +4566,6 @@
 "src": "goo"
 },
 {
-"name": "東京都新宿区西新宿４ 築11年4ヶ月 5階建",
-"addr": "東京都新宿区西新宿４",
-"st": [
-"西新宿五丁目駅 徒歩5分"
-],
-"age": "築11年",
-"rent": "22.40万円",
-"fee": "15,000円",
-"layout": "2LDK",
-"area": "51.24㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100518079664/141030001/x1030H100518079664.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
 "name": "グローバル四谷",
 "addr": "東京都新宿区南元町",
 "st": [
@@ -4658,22 +4578,6 @@
 "area": "74.25㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100512864031/114679001/x1030H100512864031.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
-"name": "コーポ松原",
-"addr": "東京都新宿区矢来町",
-"st": [
-"神楽坂駅 徒歩1分"
-],
-"age": "築45年",
-"rent": "23万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "47.49㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13104/030H100508684197/071816101/x1030H100508684197.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -4774,6 +4678,22 @@
 "src": "goo"
 },
 {
+"name": "東京都新宿区富久町 築44年9ヶ月 地上14階地下1階建",
+"addr": "東京都新宿区富久町",
+"st": [
+"新宿御苑前駅 徒歩8分"
+],
+"age": "築44年",
+"rent": "21.50万円",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "51.3㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13104/1084352178/00161881/x01084352178.html",
+"ward": "新宿区",
+"src": "goo"
+},
+{
 "name": "ヴィア・シテラ新宿",
 "addr": "東京都新宿区百人町１丁目",
 "st": [
@@ -4850,22 +4770,6 @@
 "area": "62.42㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/0/13104/6990971383/00284846/x06990971383.html",
-"ward": "新宿区",
-"src": "goo"
-},
-{
-"name": "東京都新宿区富久町 築44年9ヶ月 地上14階地下1階建",
-"addr": "東京都新宿区富久町",
-"st": [
-"新宿御苑前駅 徒歩8分"
-],
-"age": "築44年",
-"rent": "21.50万円",
-"fee": "10,000円",
-"layout": "2LDK",
-"area": "51.3㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13104/1084352178/00161881/x01084352178.html",
 "ward": "新宿区",
 "src": "goo"
 },
@@ -5030,22 +4934,6 @@
 "src": "goo"
 },
 {
-"name": "東京都中央区勝どき２丁目 築23年9ヶ月 8階建",
-"addr": "東京都中央区勝どき２丁目",
-"st": [
-"勝どき駅 徒歩3分"
-],
-"age": "築23年",
-"rent": "23万円",
-"fee": "10,000円",
-"layout": "2LDK",
-"area": "56.38㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1476490239668/147649/x41476490239668.html",
-"ward": "中央区",
-"src": "goo"
-},
-{
 "name": "トーキョー・オーディアム",
 "addr": "東京都中央区勝どき２丁目",
 "st": [
@@ -5062,18 +4950,18 @@
 "src": "goo"
 },
 {
-"name": "東京都中央区月島３丁目 築25年4ヶ月 10階建",
-"addr": "東京都中央区月島３丁目",
+"name": "東京都中央区勝どき２丁目 築23年9ヶ月 8階建",
+"addr": "東京都中央区勝どき２丁目",
 "st": [
-"月島駅 徒歩4分"
+"勝どき駅 徒歩3分"
 ],
-"age": "築25年",
+"age": "築23年",
 "rent": "23万円",
-"fee": "15,000円",
-"layout": "2SLDK",
-"area": "65.58㎡",
+"fee": "10,000円",
+"layout": "2LDK",
+"area": "56.38㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1476490239571/147649/x41476490239571.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1476490239668/147649/x41476490239668.html",
 "ward": "中央区",
 "src": "goo"
 },
@@ -5106,6 +4994,22 @@
 "area": "66.56㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100530888764/175002026/x1030H100530888764.html",
+"ward": "中央区",
+"src": "goo"
+},
+{
+"name": "東京都中央区月島３丁目 築25年4ヶ月 10階建",
+"addr": "東京都中央区月島３丁目",
+"st": [
+"月島駅 徒歩4分"
+],
+"age": "築25年",
+"rent": "23万円",
+"fee": "15,000円",
+"layout": "2SLDK",
+"area": "65.58㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/4/13102/1476490239571/147649/x41476490239571.html",
 "ward": "中央区",
 "src": "goo"
 },
@@ -5393,7 +5297,7 @@
 "layout": "2LDK",
 "area": "65.01㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100533186120/193466001/x1030H100533186120.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100532728888/175002027/x1030H100532728888.html",
 "ward": "中央区",
 "src": "goo"
 },
@@ -5409,7 +5313,7 @@
 "layout": "2LDK",
 "area": "65.01㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100532728888/175002027/x1030H100532728888.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13102/030H100529843326/006121051/x1030H100529843326.html",
 "ward": "中央区",
 "src": "goo"
 },
@@ -5622,6 +5526,22 @@
 "src": "goo"
 },
 {
+"name": "プラムハイツ",
+"addr": "東京都世田谷区下馬４",
+"st": [
+"学芸大学駅 徒歩13分"
+],
+"age": "築36年",
+"rent": "15.50万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "45㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100538942360/152915007/x1030H100538942360.html",
+"ward": "世田谷区",
+"src": "goo"
+},
+{
 "name": "メルヴェーユ代沢",
 "addr": "東京都世田谷区代沢２",
 "st": [
@@ -5633,7 +5553,7 @@
 "layout": "2LDK",
 "area": "52.15㎡",
 "teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100538653947/152509004/x1030H100538653947.html",
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100538653570/152509031/x1030H100538653570.html",
 "ward": "世田谷区",
 "src": "goo"
 },
@@ -5650,22 +5570,6 @@
 "area": "52.33㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100538426159/175002008/x1030H100538426159.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
-"name": "プラムハイツ",
-"addr": "東京都世田谷区下馬４",
-"st": [
-"学芸大学駅 徒歩14分"
-],
-"age": "築36年",
-"rent": "15.50万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "45㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100538499560/175002073/x1030H100538499560.html",
 "ward": "世田谷区",
 "src": "goo"
 },
@@ -5714,22 +5618,6 @@
 "area": "53.41㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100537530922/179577012/x1030H100537530922.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
-"name": "オーベルジュ三宿",
-"addr": "東京都世田谷区三宿１",
-"st": [
-"三軒茶屋駅 徒歩8分"
-],
-"age": "築27年",
-"rent": "18.50万円",
-"fee": "5,000円",
-"layout": "2LDK",
-"area": "49.75㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100537483260/168440008/x1030H100537483260.html",
 "ward": "世田谷区",
 "src": "goo"
 },
@@ -5810,6 +5698,22 @@
 "area": "64.75㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100534667596/082287002/x1030H100534667596.html",
+"ward": "世田谷区",
+"src": "goo"
+},
+{
+"name": "オーベルジュ三宿",
+"addr": "東京都世田谷区三宿１",
+"st": [
+"三軒茶屋駅 徒歩8分"
+],
+"age": "築27年",
+"rent": "18.50万円",
+"fee": "5,000円",
+"layout": "2LDK",
+"area": "49.75㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/1/13112/030H100533981038/176713001/x1030H100533981038.html",
 "ward": "世田谷区",
 "src": "goo"
 },
@@ -6086,38 +5990,6 @@
 "src": "goo"
 },
 {
-"name": "東京都世田谷区太子堂２丁目 築2年7ヶ月 2階建",
-"addr": "東京都世田谷区太子堂２丁目",
-"st": [
-"三軒茶屋駅 徒歩6分"
-],
-"age": "築2年",
-"rent": "21万円",
-"fee": "0円",
-"layout": "2LDK",
-"area": "52.79㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/6983184965/00511420/x06983184965.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
-"name": "クレスト下北沢",
-"addr": "東京都世田谷区代沢４丁目",
-"st": [
-"下北沢駅 徒歩14分"
-],
-"age": "新築",
-"rent": "21.20万円",
-"fee": "12,000円",
-"layout": "2LDK",
-"area": "47.6㎡",
-"teiki": false,
-"url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/1168377234/00275314/x01168377234.html",
-"ward": "世田谷区",
-"src": "goo"
-},
-{
 "name": "三宿２丁目テラスハウス",
 "addr": "東京都世田谷区三宿２丁目",
 "st": [
@@ -6146,6 +6018,38 @@
 "area": "58.52㎡",
 "teiki": false,
 "url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/6991903788/00140626/x06991903788.html",
+"ward": "世田谷区",
+"src": "goo"
+},
+{
+"name": "東京都世田谷区太子堂２丁目 築2年7ヶ月 2階建",
+"addr": "東京都世田谷区太子堂２丁目",
+"st": [
+"三軒茶屋駅 徒歩6分"
+],
+"age": "築2年",
+"rent": "21万円",
+"fee": "0円",
+"layout": "2LDK",
+"area": "52.79㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/6983184965/00511420/x06983184965.html",
+"ward": "世田谷区",
+"src": "goo"
+},
+{
+"name": "クレスト下北沢",
+"addr": "東京都世田谷区代沢４丁目",
+"st": [
+"下北沢駅 徒歩14分"
+],
+"age": "新築",
+"rent": "21.20万円",
+"fee": "12,000円",
+"layout": "2LDK",
+"area": "47.6㎡",
+"teiki": false,
+"url": "https://house.goo.ne.jp/rent/ap/detail/0/13112/1168377234/00275314/x01168377234.html",
 "ward": "世田谷区",
 "src": "goo"
 },
