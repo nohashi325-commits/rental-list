@@ -20,6 +20,10 @@
 body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:14px;line-height:1.55}
 .wrap{max-width:1120px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:18px}
 h1{font-size:clamp(22px,3.4vw,30px);font-weight:900;margin:0;letter-spacing:.01em;text-wrap:balance}
+.upd{margin:6px 0 0;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}
+.upd b{font-family:var(--num);font-weight:600;color:var(--accent)}
+.upd #ago{color:var(--fg)}
+.upd .every{color:var(--muted);font-size:.9em}
 .lead{margin:6px 0 0;color:var(--muted);max-width:70ch}
 .sum{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
 .sum b{font-family:var(--num);font-size:24px;font-weight:600}
@@ -71,12 +75,14 @@ select,input[type=search]{font:inherit;font-size:13px;color:var(--fg);background
   .sep{display:none}
 }
 </style>
+<script>addEventListener('DOMContentLoaded',()=>{const h=(Date.now()-new Date('__ISO__'))/36e5,e=document.getElementById('ago');if(isNaN(h))return;e.textContent=h<1?'（'+Math.max(1,Math.round(h*60))+'分前）':'（'+Math.floor(h)+'時間前）';if(h>6)e.style.color='#d9534f'})</script>
 <div class="wrap">
   <header>
     <h1>対象町名の賃貸リスト</h1>
+    <p class="upd">最終更新 <b>__DATE__</b><span id="ago"></span><span class="every">3時間おき（0・9・12・15・18・21時ごろ）に更新</span></p>
     <p class="lead">写真の町名にある、2LDK以上・45㎡以上・家賃23万円以下の部屋です。定期借家、旧耐震の建物、築30年以上でリフォーム・リノベの記載がない部屋は除いています。品川区・目黒区・渋谷区・港区を先に並べています。</p>
   </header>
-  <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全__TOTAL__件</span></div><span>取得日 __DATE__ ・ SUUMO / LIFULL HOME'S / at home / CHINTAI / goo / Yahoo!不動産</span></div>
+  <div class="sum"><div><b id="cnt">0</b> <span>件表示 / 新耐震の部屋 全__TOTAL__件</span></div><span>掲載元 SUUMO / LIFULL HOME'S / at home / CHINTAI / goo / Yahoo!不動産</span></div>
   <section class="panel" aria-label="絞り込み">
     <div class="row"><span class="lab">区</span><div class="chips" id="wards"></div></div>
     <div class="row">

@@ -522,7 +522,7 @@ def publish_site(items_json, excl=None):
             '<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">'
             + t.replace('__DATA__', json.dumps(items_json, ensure_ascii=False, separators=(',', ':')))
                .replace('__TOTAL__', str(len(items_json))).replace('__REPO__', REPO)
-               .replace('__EXCL__', json.dumps(sorted(excl or []), ensure_ascii=False)).replace('__DATE__', '%d年%d月%d日 %d:%02d' % (now.year, now.month, now.day, now.hour, now.minute))
+               .replace('__EXCL__', json.dumps(sorted(excl or []), ensure_ascii=False)).replace('__DATE__', '%d年%d月%d日 %d:%02d' % (now.year, now.month, now.day, now.hour, now.minute)).replace('__ISO__', now.astimezone().isoformat(timespec='minutes'))
             + '</html>')
     open(os.path.join(SITE, 'index.html'), 'w', encoding='utf-8').write(page)
     open(os.path.join(SITE, 'robots.txt'), 'w').write('User-agent: *\nDisallow: /\n')
